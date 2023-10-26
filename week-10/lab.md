@@ -1,3 +1,15 @@
+---
+title: "Creating a Full Stack Application: Lab"
+author: [Joe Appleton]
+date: "25-10-2023"
+subject: "Lab"
+keywords: [Lab]
+lang: "en"
+toc: true
+toc-own-page: false
+...
+
+
 # Lab 10: Creating a Full Stack Application
 
 ![](./assets/header.png)
@@ -14,7 +26,7 @@ In this lab, you'll combine everything you've learned so far. In doing so, we ar
 
 In this part of the lab, we'll get set up and get the starter code.
 
-## Exercise 0.1 : Getting Started
+### Exercise 0.1 : Getting Started
 
 1. As always, start and connect to your Azure Labs' virtual machine (VM) by visiting this link: [https://labs.azure.com/virtualmachines](https://labs.azure.com/virtualmachines).
 1. Connect to the VM:
@@ -29,7 +41,7 @@ In this part of the lab, we'll get set up and get the starter code.
 4. Open Laragon and start all services.
 5. Open VS Code and open the `lab_10` folder.
 
-## Exercise 0.2: Getting the starter code
+### Exercise 0.2: Getting the starter code
 
 ![](./assets/11.open_terminal.png)
 
@@ -91,7 +103,7 @@ Phew! That was a lot of setup. But now we are ready to start adding some dynamic
 
 In this section, we'll connect to our `university_web` database, this is a fairly simple process. We'll then use this connection to inject data into our views.
 
-## Exercise 1.0: Adding a database connection
+### Exercise 1.0: Adding a database connection
 
 1. First, we need to install the `mysql` package. This will allow us to connect to our database.
 
@@ -161,7 +173,7 @@ connection.connect(function (err) {
 
 In this section, we'll learn how to inject data into our EJS views. We'll start by considering our home page.
 
-## Exercise 2.0: Injecting data into the home view
+### Exercise 2.0: Injecting data into the home view
 
 1. Navigate to `localhost:8000` in your browser. You should see the following page:
 
@@ -275,7 +287,7 @@ So far, we have only injected simple, singular, values into our views. However, 
 
 Currently, there is no dynamic data on this page. Take a look at `views/students.ejs`. You should see a bog standard html table. Let's see if we can make this view dynamic.
 
-## Exercise 3.0: Dynamic multiple values
+### Exercise 3.0: Dynamic multiple values
 
 1. Open the `index.js` file. You should see the following code:
 
@@ -359,7 +371,7 @@ app.get("/students/edit/:id", async (req, res) => {
 
 Above, we are using the `?` syntax to tell MySQL that we want to use a parameterised query. We then pass the value of the URN parameter as the second parameter of the `query` function. We then inject the student object into the view. We can then access the student object in the view by using the following syntax: `<%= student.<FieldName> %>`.
 
-## Exercise 4.0: Accessing URL parameters
+### Exercise 4.0: Accessing URL parameters
 
 1. Use the above examples to update `index.js`'s `'/students/edit/:id'` route to inject the student object into the view.
 
@@ -367,13 +379,13 @@ Above, we are using the `?` syntax to tell MySQL that we want to use a parameter
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_0)**
 
-## 4.1 Injecting values into a form
+### 4.1 Injecting values into a form
 
 So far, we have been managing HTTP GET requests. Perhaps you've started to get a feel for how Express handles these requests through simple pattern matching. For instance, if I type "http://localhost:8000/students/edit/612345" into the browser and press enter, a get request is sent and matched with the route `app.get("/students/edit/:id"...)`. To this point, the communication has consisted of sending the data back to the browser (otherwise known as the client); however, to complete our application, we must enable the client to send user controlled data to the server.
 
 The most common way for users to send data is through HTML forms - you probably already know this. Let's consider how we can update `views/student_edit.ejs` and `index.js` to process a form update.
 
-## Exercise 4.1: Injecting values into a form
+### Exercise 4.1: Injecting values into a form
 
 1. First, use the browser navigate to the route: "http://localhost:8000/students/edit/612345"; you should see John Smith's record.
    Currently, the form has hard coded data! Let's consider how we can update this. In VS code, open `views/student_edit.ejs`.
@@ -425,12 +437,11 @@ Notice how we use the `<%= %>` syntax to inject the course code and course title
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_1)**
 
-## 4.2: Processing a Post request
+### 4.2: Processing a Post request
 
-We are nearly there! We can now display the data in the form. The final step is to process the form when the user submits it. 
+We are nearly there! We can now display the data in the form. The final step is to process the form when the user submits it.
 
-
-## Exercise 4.2: Processing a Post request
+### Exercise 4.2: Processing a Post request
 
 1. First, we need to add a route to handle the post request. Open the `index.js` file and add the following code:
 
@@ -442,11 +453,8 @@ app.post("/students/edit/:id", async (req, res) => {
 
 > > `index.js`
 
-
-
-2. Use the above example to update `index.js` to handle a post request from the form. 
-   
-3. Submit the form (press the update button on the update page), and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because we need to tell Express to parse are form values and attache them the HTTP request. To do this we first need to install the `body-parser` package.  
+2. Use the above example to update `index.js` to handle a post request from the form.
+3. Submit the form (press the update button on the update page), and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because we need to tell Express to parse are form values and attache them the HTTP request. To do this we first need to install the `body-parser` package.
 4. In the terminal, run the following command:
 
 ```bash
@@ -464,6 +472,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 ```
+
 > > index.js
 
 6. Now update your `post` route to print out the request body, and you should see the form values in the terminal when you submit the form:
@@ -473,10 +482,10 @@ app.post("/students/edit/:id", async (req, res) => {
   console.log(req.body);
 });
 ```
+
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_2)**
 
-
-## Exercise 4.3: Updating the database
+### Exercise 4.3: Updating the database
 
 We are now ready to update the database with the form values. The flow will look something like this:
 
@@ -544,9 +553,11 @@ app.post("/students/edit/:id", async (req, res) => {
 
 > > `index.js`
 
-Above, we are using the `isNaN` function to check if the phone number is a number. We are also checking the length of the phone number. If the phone number is not a number, or the length is not 11, we set the message to "Please enter a valid phone number". Notice how we are using the `||` operator to check if either of the conditions.
+Above, we are using the `isNaN` function to check if the phone number is a number. We are also checking the length of the phone number. If the phone number is not a number, or the length is not 11, we set the message to "Please enter a valid phone number". Notice how we are using the `||` if either of the conditions hold.
 
 3. To finish the lab, add the above code to your application. Once you've done this, try updating a student's phone number to a non-number. You should see the message "Please enter a valid phone number" appear on the edit page.
+
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_2)**
 
 ## Stretch Tasks
 
