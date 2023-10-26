@@ -70,27 +70,7 @@ app.get('/students/edit/:id', async (req, res) => {
 
 
 app.post("/students/edit/:id", async (req, res) => {
-	var message = "";
-
-	if (
-		isNaN(req.body.Stu_Phone) ||
-		req.body.Stu_Phone.length != 11
-	) {
-		message = "Please enter a valid phone number";
-	} else {
-		await connection.query("UPDATE Student SET ? WHERE URN = ?", [
-			req.body,
-			req.params.id,
-		]);
-		message = "Student updated";
-	}
-	const student = await connection.query('SELECT * FROM Student WHERE URN = ?', [req.params.id]);
-	const courses = await connection.query('SELECT * FROM Course');
-	res.render("student_edit", {
-		student: student[0],
-		courses: courses,
-		message: message,
-	});
+	console.log(req.body);	
 });
 
 

@@ -36,9 +36,8 @@ In this part of the lab, we'll get set up and get the starter code.
 1. Open the Laragon terminal.
 2. Navigate to your `lab_10` folder: `cd C:\code\lab_10`, and run the following command (**don't forget the `.` at the end, this tells git to clone the code into the current directory**):
 
-
-
 `git clone https://github.com/joeappleton18/web-and-database-lab-10.git .`
+
 > > This will clone the starter code into your lab_10 folder.
 
 1. Take a look at the code in VS Code (**pro tip:** type `code .` in the terminal and it will open VS code in the context of the directory you are located in). You should see a number of files and folders. For now, we are interested in `seeds\university.sql`. Open the file, and take a look. This is the SQL script that will create our familiar University of Discord database and populate it with some data. To keep it separate from our other database, I've called it `university_web`. Let's load this database into our MySQL server.
@@ -49,9 +48,9 @@ In this part of the lab, we'll get set up and get the starter code.
 
 5. In the Laragon terminal load the database by running the following commands (ensure, if you copy and past the commands, there are no spaces - it's a good idea to type them out):
 
-   1. Navigate the the MySQL bin folder: 
+   1. Navigate the the MySQL bin folder:
       1. `cd C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin`
-   2. Read in the SQL script: 
+   2. Read in the SQL script:
       1. `mysql -u root -p < C:\code\lab_10\seeds\university.sql`
    3. You'll be prompted for a password, just press enter.
    4. To check the database has been created:
@@ -97,14 +96,15 @@ In this section, we'll connect to our `university_web` database, this is a fairl
 1. First, we need to install the `mysql` package. This will allow us to connect to our database.
 
 ![](./assets/terminal-window.png)
-   
-2. Create a new terminal in VS Code by clicking the `+` icon in the terminal pane. 
+
+2. Create a new terminal in VS Code by clicking the `+` icon in the terminal pane.
 3. In the VS code terminal, run the following command:
 
 ```bash
 npm install mysql
 ```
-4. Switch to the terminal running your program - you'll need to check this for errors. 
+
+4. Switch to the terminal running your program - you'll need to check this for errors.
 
 5. Now we need to add the code to connect to our database. Open the `index.js` file. At the top of the file, add the following code to import two dependencies :
 
@@ -154,7 +154,6 @@ connection.connect(function (err) {
 ![](./assets/boom.png)
 
 4. If all has worked correctly, you should see the following message in the terminal: `Booom! You are connected`. If you see an error, check the database name, username, and password are correct. If you are still having problems, ask for help.
-
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_1_0)**
 
@@ -331,7 +330,7 @@ So far, we have only displayed data. However, we can also update data. Let's con
 
 ![](./assets/edit.png)
 
-You've probably guessed, but this page is also hard-coded. Let's see if we can make this view dynamic. The first thing we need to consider is how we are going to get the data for the student we want to edit. We can do this by using a URL parameter. For example, if we visit `localhost:8000/students/edit/1`, we can get the value of the `URN` parameter (1 in this case) by using the following code:
+You've probably guessed, the values in this page are hard coded. Let's see if we can make this view dynamic. The first thing we need to consider is how we are going to get the data for the student we want to edit. We can do this by using a URL parameter. For example, if we visit `localhost:8000/students/edit/1`, we can get the value of the `URN` parameter (1 in this case) by using the following code:
 
 ```javascript
 app.get("/students/edit/:id", async (req, res) => {
@@ -341,6 +340,8 @@ app.get("/students/edit/:id", async (req, res) => {
 ```
 
 Above we are using the `req.params.urn` syntax to get the value of the URN parameter. We can then use this value in our SQL query to get the student we want to edit:
+
+\break
 
 ```javascript
 app.get("/students/edit/:id", async (req, res) => {
@@ -360,28 +361,36 @@ Above, we are using the `?` syntax to tell MySQL that we want to use a parameter
 
 ## Exercise 4.0: Accessing URL parameters
 
-1. Use the above examples to update `index.js`'s `/students/edit/:id'` route to inject the student object into the view.
+1. Use the above examples to update `index.js`'s `'/students/edit/:id'` route to inject the student object into the view.
 
 2. To test your above update has worked. Navigate to `localhost:8000/students` and click edit on one of the student records. Next, update `views/student_edit.ejs` and replace "Jane Doe" with `<h1> Edit <%- student.Stu_FName %> <%- student.Stu_LName %> </h1>` and refresh the page. You should see the student's name appear on the page.
 
-## Exercise 4.1: Injecting arrays into a form
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_0)**
+
+## 4.1 Injecting values into a form
 
 So far, we have been managing HTTP GET requests. Perhaps you've started to get a feel for how Express handles these requests through simple pattern matching. For instance, if I type "http://localhost:8000/students/edit/612345" into the browser and press enter, a get request is sent and matched with the route `app.get("/students/edit/:id"...)`. To this point, the communication has consisted of sending the data back to the browser (otherwise known as the client); however, to complete our application, we must enable the client to send user controlled data to the server.
 
 The most common way for users to send data is through HTML forms - you probably already know this. Let's consider how we can update `views/student_edit.ejs` and `index.js` to process a form update.
 
-First, use the browser navigate to the route: "http://localhost:8000/students/edit/612345"; you should see John Smith's record.
-Currently, the form has hard coded data! Let's consider how we can update this. In VS code, open `views/student_edit.ejs`. Navigate to the `<form>` there are two things we need to consider.
+## Exercise 4.1: Injecting values into a form
 
-- The first is the `method` attribute in the form tag: `<form method="post" class="edit_form">` in this instance it is post. This tells the browser that we want to send a POST request to the server. We could add an optional, `action` attribute to the form tag. This tells the browser where to send the request. If we don't specify an action, the browser will send the request to the current route. In this case, it will send the request to `/students/edit/612345`.
-- The second is how we embed values into the form. Consider the following: `<input type="tel" value="19129129129" name="Stu_Phone" required>`. There are some important things to note here:
-  - The `value` attribute is used to set the value of the input. In this case, we are hard coding the value.
-  - The `name` attribute is used to give the input a name. The name should match the name of the field in the database. In this case, we are using the `Stu_Phone` field.
-  - The `required` attribute is used to tell the browser that the input is required. If the user tries to submit the form without filling in the input, the browser will display an error message.
+1. First, use the browser navigate to the route: "http://localhost:8000/students/edit/612345"; you should see John Smith's record.
+   Currently, the form has hard coded data! Let's consider how we can update this. In VS code, open `views/student_edit.ejs`.
 
-1. Use the `<%= %>` syntax to inject a value from our view. For example, we could use the following code: `<input type="tel" value="<%= student.Stu_Phone %>" name="Stu_Phone" required>`. This would inject the student's phone number into the input.
+2. Navigate to the `<form>` element there are two things we need to consider:
 
-Ok, so we've managed to inject the student's phone number into the form; however, we now need to consider the course they are taking this is a little more tricky. You'll notice the course the student is taking is a foreign key (e.g, 211). This key relates to the course code in the course table. Since we don't want to just display a course number to the user, we need to get the course name from the course table. We can do this by using the following code. You'll notice we are currently just passing in a blank array (`[]`) to the view.
+   1. The first is the `method` attribute in the form tag: `<form method="post" class="edit_form">` in this instance it is post. This tells the browser that we want to send a POST request to the server. We could add an optional, `action` attribute to the form tag. This tells the browser where to send the request. If we don't specify an action, the browser will send the request to the current route. In this case, it will send the request to `/students/edit/612345`, the current url.
+   2. The second is how we embed values into the form. Consider the following: `<input type="tel" value="19129129129" name="Stu_Phone" required>`. There are some important things to note here:
+      - The `value` attribute is used to set the value of the input. In this case, we are hard coding the value.
+      - The `name` attribute is used to give the input a name. The name should match the name of the field in the database. In this case, we are using the `Stu_Phone` field.
+      - The `required` attribute is used to tell the browser that the input is required. If the user tries to submit the form without filling in the input, the browser will display an error message.
+
+3. Use the `<%= %>` syntax to inject a value from our view. For example, we could use the following code: `<input type="tel" value="<%= student.Stu_Phone %>" name="Stu_Phone" required>`. This would inject the student's phone number into the input.
+
+Ok, so we've managed to inject the student's phone number into the form; however, we now need to consider the course they are taking this is a little more tricky. You'll notice the course the student is taking is a foreign key (e.g, 211). This key relates to the course code in the course table. Since we don't want to just display a course number to the user, we need to get the course name from the course table. You'll notice we are currently just passing in a blank array (`[]`) to the view.
+
+\break
 
 ```javascript
 app.get("/students/edit/:id", async (req, res) => {
@@ -393,7 +402,7 @@ app.get("/students/edit/:id", async (req, res) => {
 });
 ```
 
-2. Update the above to pass in the courses. You'll need to use a SQL query to get the courses. You can use the following query as a starting point: `const courses = await connection.query('SELECT * FROM Course');`.
+4. Update the above section to pass in the courses. You'll need to use a SQL query to get the courses. You can use the following query as a starting point: `const courses = await connection.query('SELECT * FROM Course');`.
 
 Now we have the courses in the view, we need to display them in the form. To do this we need to construct a loop to iterate over the courses array. For each course, we need to create an option tag. For example, we could use the following code:
 
@@ -412,11 +421,18 @@ Now we have the courses in the view, we need to display them in the form. To do 
 Notice how we use the `<%= %>` syntax to inject the course code and course title into the option tag. We also use a ternary operator (`<%=course.Crs_Code===student.Stu_Course ? 'selected'
 								: "" %>`) to check if the course code matches the student's course code. If it does, we add the `selected` attribute to the option tag. This tells the browser to select the option.
 
-3. Update the `views/student_edit.ejs` file to display the courses in the form. Once you've done this, the correct course should be selected when you visit the edit page for any student.
+5. Update the `views/student_edit.ejs` file to display the courses in the form. Once you've done this, the correct course should be selected when you visit the edit page for any student. **Note,** make sure you remove the currently hard coded courses.
+
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_1)**
 
 ## 4.2: Processing a Post request
 
-We are nearly there! We can now display the data in the form. The final step is to process the form when the user submits it. First, we need to add a route to handle the post request. Open the `index.js` file and add the following code:
+We are nearly there! We can now display the data in the form. The final step is to process the form when the user submits it. 
+
+
+## Exercise 4.2: Processing a Post request
+
+1. First, we need to add a route to handle the post request. Open the `index.js` file and add the following code:
 
 ```javascript
 app.post("/students/edit/:id", async (req, res) => {
@@ -426,15 +442,18 @@ app.post("/students/edit/:id", async (req, res) => {
 
 > > `index.js`
 
-1. Update `index.js` to handle a post request from the form. Submit the form, and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because tell Express to parse the body of the request. To do this we first need to install the `body-parser` package. In the terminal, run the following command:
+
+
+2. Use the above example to update `index.js` to handle a post request from the form. 
+   
+3. Submit the form (press the update button on the update page), and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because we need to tell Express to parse are form values and attache them the HTTP request. To do this we first need to install the `body-parser` package.  
+4. In the terminal, run the following command:
 
 ```bash
-
 npm install body-parser
-
 ```
 
-2. Next, we need to tell Express to use the body-parser package. Open the `index.js` file and add the following code:
+5. Next, we need to tell Express to use the body-parser package. Open the `index.js` file and add the following code:
 
 ```javascript
 // at the top of the file
@@ -445,16 +464,17 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 ```
+> > index.js
 
-> > `index.js``
-
-3. Now update your `post` route to print out the request body, and you should see the form values in the terminal when you submit the form:
+6. Now update your `post` route to print out the request body, and you should see the form values in the terminal when you submit the form:
 
 ```javascript
 app.post("/students/edit/:id", async (req, res) => {
   console.log(req.body);
 });
 ```
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_2)**
+
 
 ## Exercise 4.3: Updating the database
 
@@ -533,4 +553,5 @@ Above, we are using the `isNaN` function to check if the phone number is a numbe
 1. Add the ability to add a new student to the database. You'll need to create a new route, and a new view. You'll also need to add a link to the new student page on the students page. You can use the edit page as a starting point.
 2. Can you add create, read, and update functionality for another table in the database (e.g., course, department, academic, etc.)?
 3. Can you add delete functionality to the application? In the case of a student, this would mean adding a delete link next to the existing edit link. When the user clicks the delete link, the student should be deleted from the database.
-****
+
+---
