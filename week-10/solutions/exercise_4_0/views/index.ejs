@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="main.css">
+	<title>Dash</title>
+</head>
+
+<body>
+
+	<div class="content">
+		<h1> University of Discourse Dashboard </h1>
+		<div class="dash_items">
+			<a href="/students">
+				<section class="card">
+					<h2>
+						<%= studentCount %>
+					</h2>
+					<h3> Students </h3>
+				</section>
+			</a>
+			<a href="/academics">
+				<section class="card">
+					<h2>
+						<%= academicCount %>
+					</h2>
+					<h3> Academics </h3>
+
+				</section>
+			</a>
+			<a href="/departments">
+				<section class="card">
+					<h2>
+						<%= departmentCount %>
+					</h2>
+					<h3> Departments </h3>
+				</section>
+			</a>
+
+			<a href="courses">
+				<section class="card">
+					<h2>
+						<%= courseCount %>
+					</h2>
+					<h3> Courses </h4>
+				</section>
+			</a>
+
+
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

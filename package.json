@@ -1,0 +1,23 @@
+{
+  "name": "web-and-database-systems",
+  "version": "1.0.0",
+  "description": "- some of my old notes:",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build .  && rm -rf docs && mv .vuepress/dist docs && git add docs && git commit -m 'update docs' && git push --force"
+  },
+  "resolutions": {
+    "optimize-css-assets-webpack-plugin": "5.0.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/plugin-toc": "^2.0.0-beta.67",
+    "vuepress": "^1.9.10"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2"
+  }
+}
