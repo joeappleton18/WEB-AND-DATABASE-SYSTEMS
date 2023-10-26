@@ -565,4 +565,3 @@ Above, we are using the `isNaN` function to check if the phone number is a numbe
 2. Can you add create, read, and update functionality for another table in the database (e.g., course, department, academic, etc.)?
 3. Can you add delete functionality to the application? In the case of a student, this would mean adding a delete link next to the existing edit link. When the user clicks the delete link, the student should be deleted from the database.
 
----
