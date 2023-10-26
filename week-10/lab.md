@@ -155,6 +155,9 @@ connection.connect(function (err) {
 
 4. If all has worked correctly, you should see the following message in the terminal: `Booom! You are connected`. If you see an error, check the database name, username, and password are correct. If you are still having problems, ask for help.
 
+
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_1_0)**
+
 ## 2.0 Injecting data into our views
 
 In this section, we'll learn how to inject data into our EJS views. We'll start by considering our home page.
@@ -183,6 +186,8 @@ app.get("/", async (req, res) => {
 The above code, creates a route for the `/` path (this is the entry point of our website). Notice how we then call the `render` function. This function takes two parameters: the first is the ejs template we want to render ("index"). The second is an object containing the data we want to inject into the view. In this case, we are injecting four values: `studentCount`, `academicCount`, `departmentCount`, and `courseCount`. The curly braces `{}` are used to create an object. For now, just think of an object as a collection of key-value pairs and understand that we are hard-coding the values of these variables. Try changing some of the numbers and refreshing the page. You should see the values change on the page.
 
 We can access these values in our view by using the following syntax: `<%= studentCount %>`. The `<%=` and `%>` are special tags that tell EJS to inject the value of the variable into the view. Open `views/index.ejs` and take a look at the code. You should see the following:
+
+\break
 
 ```html
 <div class="row">
@@ -245,7 +250,9 @@ app.get('/', async (req, res) => {
 
 > > index.js
 
-Above, we run the query and store the result in a variable called `studentCount`. Notice how we use the `await` keyword. This is because the `connection.query` function is asynchronous. This means that it will take some time to run. We use the `await` keyword to tell NodeJS to wait until the query has finished running before continuing. StudentCount will be an array of objects. In this case it will be an array with one object:
+Above, we run the query and store the result in a variable called `studentCount`. Notice how we use the `await` keyword. This is because the `connection.query` function is asynchronous. This means that it will take some time to run. We use the `await` keyword to tell NodeJS to wait until the query has finished running before continuing. StudentCount will be an array of objects. In this case, it will be an array with one object:
+
+\break
 
 ```javascript
 [
@@ -257,7 +264,9 @@ Above, we run the query and store the result in a variable called `studentCount`
 
 We access the count value by using the following syntax: `studentCount[0].count`. The `[0]` is used to access the first element in the array. The `.count` is used to access the count property of the object.
 
-1. To finish this task replace the remaining hard coded values (`academicCount`, `departmentCount`, and `courseCount`) with the output of SQL queries.
+2. To finish this task replace the remaining hard coded values (`academicCount`, `departmentCount`, and `courseCount`) with the output of SQL queries.
+
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_2_0)**
 
 ## 3.0 Working with more complex data
 
@@ -271,13 +280,15 @@ Currently, there is no dynamic data on this page. Take a look at `views/students
 
 1. Open the `index.js` file. You should see the following code:
 
+\break
+
 ```javascript
 app.get("/students", async (req, res) => {
   res.render("students", { students: [] });
 });
 ```
 
-Above, we are rendering the `students` view and injecting an empty array into the view. We can access this array in the view by using the following syntax: `<%= students %>`. Let's see if we can inject some data into this array. Update your code so instead of an empty array we are injecting database values:
+Above, we are rendering the `students` view and injecting an empty array into the view. We can access this array in the view by using the following syntax: `<%= students[0] %>` (this will grab our first student). Let's see if we can inject some data into this array. Update your code so instead of an empty array we are injecting database values:
 
 ```javascript
 app.get("/students", async (req, res) => {
@@ -288,9 +299,9 @@ app.get("/students", async (req, res) => {
 });
 ```
 
-Notice how we use an inner join. This is because we want to get the course name, not the course code.
+Notice how we use an inner join. This is because we want to get the course name. If we did not have this we would just have to display the course code (this would not mean much to an end user).
 
-2. Now we have injected the data into the view, we need to display it. Open the `views/students.ejs` file. The great thing about EJS is that we can use JavaScript in our views. This means we can use loops to iterate over our data. For example we can use the following code to iterate over our students array and out put a table row for each student:
+Now we have injected the data into the view, we need to display it. Open the `views/students.ejs` file. The great thing about EJS is that we can use JavaScript in our views. This means we can use loops to iterate over our data. For example we can use the following code to iterate over our students array and out output a table row for each student:
 
 ```html
 <% students.forEach(student=> { %>
@@ -310,7 +321,9 @@ Notice how we use an inner join. This is because we want to get the course name,
 
 Notice how we use the `<% %>` tags to tell EJS that we are using JavaScript. We then use the `forEach` function to iterate over the students array. For each student, we output a table row. Further, we create a link to the edit page (`<a href="/students/edit/<%- student.URN %>"> Edit </a> </td>`). We'll create this page in the next exercise.
 
-3. To complete this exercise, see if you can update `views/students.ejs` to dynamically display our students.
+2. To complete this exercise, see if you can update `views/students.ejs` to dynamically display our students.
+
+**[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_3_0)**
 
 ## 4.0 Updating data
 
