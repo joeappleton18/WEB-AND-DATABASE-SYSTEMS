@@ -39,3 +39,30 @@ This section of the course is an evolution of courses from previous years. The n
 ### License
 
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+
+The structure of your application should be as follows:
+
+```
+
+├── app
+│   ├── index.js
+│   ├── package.json
+|   ├── views
+|   |   ├── index.ejs
+|   |   ├ .... other views
+|   ├── public
+|   |   ├── main.css
+|   |   ├── ... other static assets
+
+```
+
+
+Develop a Frontend using HTML, CSS, and EJS. As explained above, as a minimum, you should have an EJS view for each of the following:
+
+ • the homepage - served on / and may well contain summaries of the data in the database.
+• view all - this will display a list of records. 
+• view one - displays a single record. 
+
+
+

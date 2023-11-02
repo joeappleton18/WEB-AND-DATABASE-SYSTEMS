@@ -9,7 +9,7 @@ toc: true
 toc-own-page: false
 ...
 
-# Week 8 Lab: Introduction to JavaScript
+# Lab 8: Introduction to JavaScript
 
 ## Introduction
 
