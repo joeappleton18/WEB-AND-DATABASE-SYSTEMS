@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+		crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+	<style>
+		.bd-callout {
+			padding: 1.25rem;
+			margin-top: 1.25rem;
+			margin-bottom: 1.25rem;
+			color: var(--bd-callout-color, inherit);
+			background-color: var(--bd-callout-bg, var(--bs-gray-100));
+			border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
+		}
+
+		.bd-callout-info {
+			--bd-callout-color: var(--bs-info-text);
+			--bd-callout-bg: var(--bs-info-bg-subtle);
+			--bd-callout-border: var(--bs-info-border-subtle);
+		}
+
+		.bd-callout-danger {
+			--bd-callout-color: var(--bs-danger-text);
+			--bd-callout-bg: var(--bs-danger-bg-subtle);
+			--bd-callout-border: var(--bs-danger-border-subtle);
+		}
+
+		.web h3,
+		h5 {
+			margin-top: 20px;
+		}
+	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+	<div class="container">
+		<h2 class="text-muted"></h2>
+		<br>
+		<h2 class="text-muted">Web and database design individual project</h2>
+		<hr>
+		<div class="card">
+			<div class="card-header"><strong>Key Information</strong></div>
+			<div class="card-body">
+				<table class="table table-borderless" style="width: 99.9748%; height: 322.301px;">
+					<tbody>
+						<tr style="height: 37.7167px;">
+							<th scope="row" style="width: 18.8772%; height: 37.7167px;">
+								Released</th>
+							<td style="width: 81.0095%; height: 37.7167px;">Week 7:
+								Wednesday 8th November 2023</td>
+						</tr>
+						<tr style="height: 37.7167px;">
+							<th scope="row" style="width: 18.8772%; height: 37.7167px;">
+								Deadline</th>
+							<td style="width: 81.0095%; height: 37.7167px;">Week 12:
+								Wednesday, 03 January 2024 at 16:00</td>
+						</tr>
+						<tr style="height: 37.7167px;">
+							<th scope="row" style="width: 18.8772%; height: 37.7167px;">
+								Deliverables</th>
+							<td style="width: 81.0095%; height: 37.7167px;">Report (PDF);
+								db_setup and SQL_queries (SQL); ZIP folder with web
+								files</td>
+						</tr>
+						<tr style="height: 37.7167px;">
+							<th scope="row" style="width: 18.8772%; height: 37.7167px;">
+								Submission</th>
+							<td style="width: 81.0095%; height: 37.7167px;">SurreyLearn
+								Coursework Folder (under Assignments)</td>
+						</tr>
+						<tr style="height: 37.7167px;">
+							<th scope="row" style="width: 18.8772%; height: 37.7167px;">
+								Weighting</th>
+							<td style="width: 81.0095%; height: 37.7167px;">70% of final
+								module grade*</td>
+						</tr>
+						<tr style="height: 109.717px;">
+							<th scope="row" style="width: 18.8772%; height: 109.717px;">
+								Academic Misconduct</th>
+							<td style="width: 81.0095%; height: 109.717px;">Coursework will
+								be routinely checked for academic misconduct. Your
+								submission must be your own work. Please revisit the
+								academic integrity slides and regulations and ensure
+								you know what this means. Do not give your work to
+								anyone else, either before or after the coursework
+								submission deadline.</td>
+						</tr>
+					</tbody>
+				</table>
+				<p></p>
+				<p>*Note: The marks are out of 100 in the descriptor but the final mark will be out of
+					70, the test is 30%</p>
+			</div>
+		</div>
+		<p></p>
+		<br>
+		<h2>Introduction</h2>
+		<p>This coursework is individual work and will assess your independent capability of modelling,
+			designing and implementing a small relational database with a basic web front-end.</p>
+		<div class="bd-callout">
+			<h6>Scenario</h6>
+			You have been asked to develop a website with a database backend for a university student
+			society or club that interests you. You can look at University of Surrey's clubs and societies
+			as well as the sports clubs at the Surrey Sports Park. You do not need to pick one of these -
+			you can come up with your own idea for a club but it has to be a university club. Alternatively,
+			you can design a database that stores the basic details of clubs and societies without going
+			into details of activities and events. The university would also like to keep data on students'
+			hobbies so they can suggest appropriate clubs and societies that students might be interested in
+			joining.
+		</div>
+		<p>You will get experience in the following:</p>
+		<ul style="list-style-type: circle;">
+			<li>Eliciting appropriate business rules</li>
+			<li>(Enhanced) Entity Relationship (EER) data modelling</li>
+			<li>EER to Relational Schema Mapping</li>
+			<li>Implementing tables and querying data using SQL</li>
+			<li>Accessing data stored in a MySQL relational database using NodeJS</li>
+			<li>Creating a web interface to the database using front-end technologies such as HTML and CSS.
+			</li>
+		</ul>
+		<p>The coursework is in two parts: Part 1 covers database design and implementation and Part 2 covers
+			web development.</p>
+		<p></p>
+		<br>
+		<h2>Part 1: Database Design and Implementation [65 Marks]</h2>
+		<p>An EERD starting diagram with a course entity type and student specialisation hierarchy is provided
+			to you as a starting point. You <strong>must use</strong> this and build on this for your
+			scenario. You are provided with the following files:</p>
+		<ol>
+			<li><a href="/content/enforced/252843-COM1025_2023-4_SEMR1_1/Coursework/coursework-EERD.drawio?isCourseFile=true"
+					target="_self">coursework-EERD.drawio</a> (This has the course entity type and
+				student specialisation hierarchy)</li>
+			<li><a href="/content/enforced/252843-COM1025_2023-4_SEMR1_1/Coursework/db_setup.sql?isCourseFile=true"
+					target="_self">db_setup.sql</a> (This has the SQL DDL and INSERT statements )
+			</li>
+			<li><a href="/content/enforced/252843-COM1025_2023-4_SEMR1_1/Coursework/SQL_queries.sql?isCourseFile=true"
+					target="_self">SQL_queries.sql</a> (This is for the SQL queries)</li>
+			<li><a href="/content/enforced/252843-COM1025_2023-4_SEMR1_1/Coursework/COM1025-Coursework_template.docx?isCourseFile=true"
+					target="_self">COM1025-Coursework_template.docx</a>&nbsp; (This is a brief
+				template for the report)</li>
+		</ol>
+		<div class="card">
+			<div class="card-header">Mark breakdown for tasks</div>
+			<div class="card-body">
+				<table class="table table-borderless" style="width: 101.095%; height: 493.81px;">
+					<thead>
+						<tr style="height: 37.4306px;">
+							<th scope="col" style="height: 37.4306px;">Task</th>
+							<th scope="col" style="height: 37.4306px;">Title</th>
+							<th scope="col" style="height: 37.4306px;">Mark&nbsp;</th>
+							<th scope="col" style="height: 37.4306px;">&nbsp;Deliverable:
+							</th>
+						</tr>
+					</thead>
+					<colgroup>
+						<col class="col-1" style="width: 10.7617%;">
+						<col class="col-4" style="width: 36.0218%;">
+						<col class="col-2" style="width: 8.688%;">
+						<col class="col-2" style="width: 44.5226%;">
+					</colgroup>
+					<tbody>
+						<tr style="height: 57.3909px;">
+							<td style="height: 57.3909px;">T1</td>
+							<td style="height: 57.3909px;">
+								<p>Business Rules</p>
+							</td>
+							<td style="height: 57.3909px;">5</td>
+							<td style="height: 57.3909px;">COM1025_coursework.pdf</td>
+						</tr>
+						<tr style="height: 53.4226px;">
+							<td style="height: 53.4226px;">T2</td>
+							<td style="height: 53.4226px;">
+								<p>EER Modelling</p>
+							</td>
+							<td style="height: 53.4226px;">12.5</td>
+							<td style="height: 57.3909px;">COM1025_coursework.pdf</td>
+						</tr>
+						<tr style="height: 61.4286px;">
+							<td style="height: 61.4286px;">T3</td>
+							<td style="height: 61.4286px;">EERM to relational schema</td>
+							<td style="height: 61.4286px;">10</td>
+							<td style="height: 57.3909px;">COM1025_coursework.pdf</td>
+						</tr>
+						<tr style="height: 61.4286px;">
+							<td style="height: 61.4286px;">T4</td>
+							<td style="height: 61.4286px;">SQL Data Definition&nbsp;</td>
+							<td style="height: 61.4286px;">7.5</td>
+							<td style="height: 57.3909px;">db_setup.sql&nbsp;</td>
+						</tr>
+						<tr style="height: 53.4226px;">
+							<td style="height: 53.4226px;">T5</td>
+							<td style="height: 53.4226px;">SQL Data Manipulation</td>
+							<td style="height: 53.4226px;">10</td>
+							<td style="height: 57.3909px;">SQL_queries.sql</td>
+						</tr>
+						<tr style="height: 46.4286px;">
+							<td style="height: 46.4286px;">T6</td>
+							<td style="height: 46.4286px;">Extra challenge task</td>
+							<td style="height: 46.4286px;">15</td>
+							<td style="height: 57.3909px;">COM1025_coursework.pdf and other
+								files depending on the task</td>
+						</tr>
+						<tr style="height: 61.4286px;">
+							<td style="height: 61.4286px;">Other</td>
+							<td style="height: 61.4286px;">Digital skills and report writing
+							</td>
+							<td style="height: 61.4286px;">5</td>
+							<td style="height: 57.3909px;">&nbsp;Quality of presentation of
+								COM1025_coursework.pdf&nbsp;</td>
+						</tr>
+						<tr style="height: 61.4286px;">
+							<td style="height: 61.4286px;"></td>
+							<td style="height: 61.4286px;">TOTAL Marks</td>
+							<td style="height: 61.4286px;">65</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<p></p>
+		<br>
+		<h5>1. Business Rules [5 marks]</h5>
+		<p>The business rules should describe ALL the EER Model entities and relationships, the more complicated
+			attributes, including a multivalued attribute, and any constraints. You are given the business
+			rules for the course entity and student specialisation hierarchy as well as an entity Hobby
+			in the report template.&nbsp;</p>
+		<p>These go in <strong>Section 1</strong> of the report COM1025_coursework.doc</p>
+		<p></p>
+		<br>
+		<h5>2. EER Modelling [12.5 marks]</h5>
+		<p>Apart from the course entity type and student specialisation hierarchy given to you in the starting
+			EERD, you need to identify at least two other entity types with appropriate attributes. These
+			entities should not be associative or weak entities. You can have an additional 1 to 2 entities
+			if you want to. You should have one multivalued attribute. Relationships between the entities
+			should show all the appropriate constraints.</p>
+		<p>You need to draw the Hobby entity based on the business rules given to you in COM1025_coursework.doc
+		</p>
+		<p style="padding-left: 40px;">2.1 Two entities with appropriate attributes (one multivalued)&nbsp; [5
+			marks]</p>
+		<p style="padding-left: 40px;">2.2 Two binary relationships at least one being one-to-many&nbsp; &nbsp;
+			[5 marks]</p>
+		<p style="padding-left: 40px;">2.2 The entity Hobby based on the business rules given to you&nbsp;
+			&nbsp;
+			&nbsp; &nbsp; [2.5 marks]</p>
+		<p>The EER diagram must be drawn following the crows-foot notation taught in this module, and you can
+			use
+			any diagram drawing software tool to create your notation-compatible EER diagram (e.g.
+			diagrams.net). You are provided with a drawio file that contains the student specialisation
+			hierarchy which you must use. If you decide to use some other software; you will have to re-draw
+			the hierarchy.</p>
+		<p>After you are done with your modelling, save the drawio file and then export it as an image (PNG).
+		</p>
+		<p>Include this Image in&nbsp;<strong>Section 2</strong> of the report COM1025_coursework.doc</p>
+		<p></p>
+		<br>
+		<h5>3. EER Model to Relational Schema [10 marks]</h5>
+		<p>The next step is to translate your ER Model to a relational schema using the appropriate mapping
+			algorithms. You will need to translate the entity Hobby and the two entities you identified in
+			section 2. You do not have to translate the whole ER Model if you did additional work to gain
+			more marks for the extra challenge task.</p>
+		<p style="padding-left: 40px;">3.1 Translating Many-to-Many relationship between Student and Hobby [4
+			marks]</p>
+		<p style="padding-left: 40px;">3.2 Translating a one-to-many binary relationship&nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp;[2 marks]</p>
+		<p style="padding-left: 40px;">3.3 Translating one other binary relationship&nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2 marks]</p>
+		<p style="padding-left: 40px;">3.4 Translating the multivalued attribute&nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[2 marks]</p>
+		<p>These go in <strong>Section 3</strong> of the report COM1025_coursework.doc</p>
+		<p></p>
+		<br>
+		<h5>4. SQL Data Definition Language [7.5 Marks]</h5>
+		<p>The third step is to create the tables using SQL and populate them with data. You don’t have to
+			implement all the relations – Course and Student have already been provided; so you need to
+			create at least two other tables from the new entities you came up with, and load them with
+			data.
+			Remember that all the tables in your database should be linked with foreign keys such that you
+			can write the queries specified below in section 5.&nbsp;</p>
+		<p style="padding-left: 40px;">4.1 Two SQL table definitions with keys and constraints shown&nbsp; [6
+			marks]</p>
+		<p style="padding-left: 40px;">4.2 INSERT data statements&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [1.5 marks]</p>
+		<p>These go in the <strong>db_setup.sql </strong>file.</p>
+		<p></p>
+		<br>
+		<h5>5. SQL Data Manipulation Language [10 marks]</h5>
+		<p>In this part, you will write three queries to query the data in your database. Please write comments
+			for what the query does, otherwise you will lose marks.</p>
+		<p style="padding-left: 40px;">5.1 One SELECT statement using GROUP BY or/and an aggregate
+			function&nbsp; &nbsp;[2 Marks]</p>
+		<p style="padding-left: 40px;"><span
+				style="background-color: var(--bs-body-bg); color: var(--bs-body-color); font-family: var(--bs-body-font-family); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">5.2
+				One statement with a subquery &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				&nbsp;[3 Marks]</span></p>
+		<p style="padding-left: 40px;">5.3 One statement with a JOIN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; <span
+				style="background-color: var(--bs-body-bg); color: var(--bs-body-color); font-family: var(--bs-body-font-family); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">[3
+				Marks]</span></p>
+		<p style="padding-left: 40px;">5.4 Either the subquery or the JOIN should use three tables &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+				style="background-color: var(--bs-body-bg); color: var(--bs-body-color); font-family: var(--bs-body-font-family); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">[2
+				Marks]</span></p>
+		<p class="text-muted">These go in the <strong>SQL_queries.sql </strong>file.</p>
+		<p class="text-muted"></p>
+	</div>
+	<div class="container"><br>
+		<h5>6. Extra Challenge/Advanced Task [15 marks]</h5>
+		<p>For this section, you can pick what you enjoy doing that is more challenging to gain these marks.</p>
+		<p>You can do some more EER modelling (e.g. another specialisation hierarchy and translate it correctly
+			or a ternary relationship and translate it correctly). A very relevant m-n relationship
+			translated correctly will also gain you some marks.&nbsp;</p>
+		<p>If you prefer coding you can also write some challenging SQL queries as well as use extra constraints
+			and indexing.</p>
+		<p>Please clearly indicate in <strong>section 5</strong> of the report what extra work you did.</p>
+		<p></p>
+		<br>
+		<h5>7. Digital Skills [5 marks]</h5>
+		<p>In this section, you will get marks for your presentation and report writing skills.</p>
+		<p>Please delete the explanations in italics that I have put in the report - they are there for your
+			guidance
+			only. Also, you can use another template that is more appealing, as long as you keep the same
+			section titles and the amount of space provided for each section stays the same. Think of how
+			you format and structure the report. <strong>You are not allowed to go over the page limit of
+				6</strong> (not counting front page or Appendix).</p>
+		<br>
+		<section class="web">
+			<h2>Part 2 Web Frontend to Database [35 Marks]</h2>
+			<p>This part of the assessment requires you to create a Node.js application to connect
+				to the database created in Part 1. You will display records based on input data or
+				choices made by the user of your website.</p>
+
+			<p> You do not have to interact with all tables in your database. For instance, you may only
+				implement
+				functionality around
+				a single table. </p>
+
+			<p> As a minimum, you should ensure you have an "index.js" file that serves four user-facing,
+				routes.
+				Each route should
+				have a related EJS template (see, the week 10 lab class for guidance on how to do this):
+			</p>
+
+			<ul>
+				<li> the homepage - may well contain summaries of the data in the database. </li>
+				<li> view all - this will display a list of records. </li>
+				<li> view one - this will display a single record. </li>
+				<li> update one - this will allow a user to update a single record. </li>
+			</ul>
+
+			<div class="card">
+				<div class="card-header">Mark breakdown for tasks</div>
+				<div class="card-body">
+					<table class="table table-borderless"
+						style="width: 101.095%; height: 493.81px;">
+						<thead>
+							<tr style="height: 37.4306px;">
+								<th scope="col" style="height: 37.4306px;">Task</th>
+								<th scope="col" style="height: 37.4306px;">Title</th>
+								<th scope="col" style="height: 37.4306px;">Mark&nbsp;
+								</th>
+							</tr>
+						</thead>
+						<colgroup>
+							<col class="col-1" style="width: 10.7617%;">
+							<col class="col-4" style="width: 36.0218%;">
+							<col class="col-2" style="width: 8.688%;">
+						</colgroup>
+						<tbody>
+							<tr style="height: 57.3909px;">
+								<td style="height: 57.3909px;">T8</td>
+								<td style="height: 57.3909px;">
+									<p>Application Structure</p>
+								</td>
+								<td style="height: 57.3909px;">3</td>
+							</tr>
+							<tr style="height: 53.4226px;">
+								<td style="height: 53.4226px;">T9</td>
+								<td style="height: 53.4226px;">
+									<p>Database Connection</p>
+								</td>
+								<td style="height: 53.4226px;">2</td>
+							</tr>
+							<tr style="height: 61.4286px;">
+								<td style="height: 61.4286px;">T10</td>
+								<td style="height: 61.4286px;">A Minimum of 4
+									User-facing Routes Served</td>
+								<td style="height: 61.4286px;">4</td>
+							</tr>
+							<tr style="height: 61.4286px;">
+								<td style="height: 61.4286px;">T11</td>
+								<td style="height: 61.4286px;">Construct EJS Views for
+									the 4 Routes</td>
+								<td style="height: 61.4286px;">3</td>
+							</tr>
+							<tr style="height: 53.4226px;">
+								<td style="height: 53.4226px;">T12</td>
+								<td style="height: 53.4226px;">Functionality to Display
+									the Rows of a Single Table in an HTML Table
+								</td>
+								<td style="height: 53.4226px;">4</td>
+							</tr>
+							<tr style="height: 53.4226px;">
+								<td style="height: 53.4226px;">T13</td>
+								<td style="height: 53.4226px;">Functionality for
+									Displaying a Single Table Row</td>
+								<td style="height: 53.4226px;">4</td>
+							</tr>
+							<tr style="height: 53.4226px;">
+								<td style="height: 53.4226px;">T14</td>
+								<td style="height: 53.4226px;">Functionality for
+									Updating a Single Table Row
+								</td>
+								<td style="height: 53.4226px;">8</td>
+							</tr>
+							<tr style="height: 46.4286px;">
+								<td style="height: 46.4286px;">T15</td>
+								<td style="height: 46.4286px;">Extra Challenge/Advanced
+									Task</td>
+								<td style="height: 46.4286px;">7</td>
+								All tasks will delivered in a single zipped, folder
+								called
+								"website.zip" </td>
+							</tr>
+
+
+							<tr style="height: 61.4286px;">
+								<td style="height: 61.4286px;"></td>
+								<td style="height: 61.4286px;"><strong>TOTAL
+										Marks:</strong>
+								</td>
+								<td style="height: 61.4286px;">35</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+
+			<h5>8. Application Structure [3 Marks] </h5>
+
+			Your web application should be based on the following structure: <br><br>
+
+			<code>
+
+			├── website <br>
+			│ ├── index.js <br>
+			│ ├── package.json <br>
+			| ├── views <br>
+			| | ├── index.ejs <br>
+			| | ├ .... other views and folders to contain partial views <br>
+			| ├── public <br>
+			| | ├── main.css <br>
+			| | ├── ... other static assets <br>
+		</code>
+			<div class="bd-callout bd-callout-danger">
+				<h6>Important</h6>
+				Before running your website, we will run the "db_setup.sql" file; you should ensure this
+				file is
+				up to date.
+			</div>
+			<ul>
+				<li> Ensure you have a package.json file (generated using <code>npm init</code>) in the
+					root of
+					your project. </li>
+				<li> The package.json file must include the script "start" that will run your program
+					(e.g.,
+					<code>"start": "nodemon index.js")</code>.
+				</li>
+				<li> Since your dependencies are listed in the package.json folder, please delete your
+					node_modules
+					folder before submitting the assessment. </li>
+			</ul>
+
+			<h5>9. Database Connection [2 Marks] </h5>
+
+			<p>In index.js, you should write the code to: </p>
+
+			<ul>
+
+				<li> Connect to your database using the MySQL, Node.JS package. <span class="mark"> [1
+						mark] </span> </li>
+				<li> Ensure that you handle any errors that may occur when connecting to the
+					database.
+					<span class="mark"> [1 mark] </span>
+				</li>
+			</ul>
+			<h5> 10. A Minimum of 4 User-facing Routes Served [ marks] </h5>
+
+			Using express, you should serve a minimum of 4 user-facing routes:
+
+			<ul>
+				<br>
+				<li>
+					<strong>homepage</strong> - may well contain summaries of the data in the
+					database.
+					1 mark]
+				</li>
+				<li>
+					<strong>view all</strong> - this will display a list of records. [1 mark]
+				</li>
+				<li>
+					<strong>view one</strong> - this will display a single record. [1 mark]
+				</li>
+				<li>
+					<strong>update one</strong> - this will allow a user to update a single record.
+					[1 mark]
+				</li>
+			</ul>
+
+
+			<h5> 11. Construct EJS Views for the 4 Routes [3 marks] </h5>
+
+			<p> For each user-facing route, you should construct an EJS view. </p>
+
+			<p> You should: </p>
+
+
+			<ul>
+
+				<li> Ensure correct use of basic HTML elements (e.g., Body, Head,
+					Headings, Titles, Paragraphs, Attributes, Tags, etc) </li>
+				<li> Create a single top navigation bar partial (shared across each page) with links to
+					every
+					page. </li>
+				<li> Use CSS to style the EJS templates. You are welcome to use a HTML template or
+					library
+					(e.g., bootstrap, tailwind), if it is
+					free, and you attribute the use of it in your report.
+
+			</ul>
+			<h5> 12. Functionality to Display the Rows of a Single Table in an HTML Table [4 marks] </h5>
+
+			<p> Implement functionality to display all rows of an database table in an HTML table. This
+				data should be displayed
+				when a user visits your "view all" route. </p>
+
+			<p> You should: </p>
+			<ul>
+				<li> Write a SQL query to retrieve all rows from a table, you may include joins. [2
+					marks] </li>
+				<li> Pass the results of the query to an EJS template. [1 mark] </li>
+				<li> Display the results in an HTML table. [1 mark] </li>
+			</ul>
+
+			<h5> 13. Functionality for Displaying a Single Table Row [4 marks] </h5>
+
+			<p> Implement the functionality to display a single row of an database table. This data should
+				be
+				displayed
+				when a user visits your "view one" route. </p>
+
+			<p> You should should: </p>
+			<ul>
+				<li> Write a SQL query to dynamically retrieve a single row from a table, you may
+					include joins.
+					[2 marks] </li>
+				<li> Allow the route to accept a parameter that will be used to identify the row to be
+					displayed.
+					For example, visiting the route, '/student/123' would retrieve a student with an
+					id of
+					123. [1 mark] </li>
+				<li> Add the functionality to your "view all" route to allow a user to click on a link
+					to
+					view a
+					single row. [1 mark] </li>
+			</ul>
+
+			<h5> 14. Functionality for Updating a Single Table Row [8 marks] </h5>
+
+			<p> Implement the functionality to update a single row of a database table. This functionality
+				should
+				be added to the "update one" route.</p>
+
+			<p> You should should: </p>
+
+			<ul>
+				<li> Display the row in an HTML form. [2 marks] </li>
+				<li> Allow the route to accept a parameter that will be used to identify the row to be
+					displayed.
+					For example visiting the route, 'edit_student/123' would retrieve a student with
+					an id
+					of
+					123, and display the row's values in a form. [1 mark] </li>
+				<li> Add HTML validation to the form. [1 mark] </li>
+				<li> In index.js, construct a route that will accept a POST request and update the
+					database
+					with the new values. </li>
+				<li> In the new route, you should:
+					<ul>
+						<li> write a SQL query to update the database. [1 mark]</li>
+						<li> Perform simple error checking. [1 mark]</li>
+						<li> Only update the database if the form is valid. [1 mark]</li>
+						<li> Redirect the user to the "update one" route and display a message
+							in the "ejs template" based on if
+							there was an error or if the record was successfully updated. [1
+							mark]
+						</li>
+					</ul>
+
+			</ul>
+			</li>
+
+
+			<h5>15. Extra Challenge/Advanced Task [7 marks]</h5>
+			<p>For this section, as with the database part of the assessment, you can explore areas that
+				interest
+				you to
+				gain additional marks.</p>
+			<p>Please clearly indicate in <strong>section 5 </strong> of the report what extra work you did.
+			</p>
+			<p>Some ideas for extra work include but are not limited to: </p>
+
+			<ul>
+				<li> The functionality to create new records. </li>
+				<li> Node.js code to handle the deletion of records. </li>
+				<li> The functionality to search for records. </li>
+			</ul>
+
+			<h5> Preparing Your Website for Submission </h5>
+
+			<p> Before submitting your website, you should ensure that you have: </p>
+
+			<ul>
+				<li> Based your project on the structure specified in task 8. </li>
+				<li> Included a package.json (generated using <code> npm init</code>) file in the root
+					of your
+					project. </li>
+				<li> The package.json file must include the script "start" that will run your program
+					(e.g.,
+					"start": "nodemon index.js").</li>
+				<li> Since your dependencies are in the package.json folder, please delete your
+					node_modules
+					folder before submitting. </li>
+				<li> Before running your program, we will run the "db_setup.sql" file; you should ensure
+					this
+					file is up to date. </li>
+			</ul>
+
+			After check your work aligns to the above points, you should zip your project folder. The zip
+			file should be named
+			website.zip. Please only use the zip file format (not a rar, 7z, etc).
+
+
+			<h3>Submission</h3>
+			<p>Four deliverables uploaded to SurreyLearn (found under Assessments -> Assignments). This
+				deliverable
+				is in addition to </p>
+			<p style="padding-left: 40px;">1.&nbsp; db_setup.sql (This has the SQL DDL and INSERT statements
+				)</p>
+			<p style="padding-left: 40px;">2.&nbsp; SQL_queries.sql</p>
+			<p style="padding-left: 40px;">3. COM1025_coursework.pdf</p>
+			<p style="padding-left: 40px;">3. website.zip</p>
+			<div class="bd-callout bd-callout-danger">
+				<h6>Important</h6>
+				Remember to convert your word doc to pdf. Check your pdf to make sure it is not
+				corrupted before
+				uploading it.
+			</div>
+		</section> <!-- .webSection-->
+
+	</div>
+
+
+</body>
+
+</html>

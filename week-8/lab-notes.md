@@ -298,3 +298,39 @@ function add(a, b) {
 const result = add(3, 4);
 console.log(result); // Prints 7
 ```
+
+## Further Functions
+
+### Arrow Functions
+
+Arrow functions are a new way to write functions in JavaScript. They are more concise than traditional functions and allow you to write functions without the function keyword, return keyword (in some cases), and curly braces.
+
+```javascript
+// Traditional function
+function add(a, b) {
+  return a + b;
+}
+
+// Arrow function
+
+const add = (a, b) => a + b;
+```
+
+### Anonymous Functions
+
+Anonymous functions are functions that do not have a name. They are often used as callback functions, which are functions passed as arguments to other functions.
+
+```javascript
+// Callback function
+
+function add(a, b, callback) {
+  const result = a + b;
+  callback(result);
+}
+
+add(3, 4, function (result) {
+  console.log(result); // Prints 7
+});
+```
+
+Above, we pass an anonymous function as the third argument to the add function. The anonymous function is called inside the add function and passed the result of the addition. The anonymous function then prints the result to the console.

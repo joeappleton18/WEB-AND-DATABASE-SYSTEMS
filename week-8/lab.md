@@ -21,16 +21,15 @@ To complete the lab, work through the exercises below - please attempt them all.
 
 In this part of the lab, you'll set up your development environment.
 
-### Exercise 0.0  : Loading the Virtual Machine
+### Exercise 0.0 : Loading the Virtual Machine
 
 1. As always, start and connect to your Azure Labs' virtual machine (VM) by visiting this link: [https://labs.azure.com/virtualmachines](https://labs.azure.com/virtualmachines).
 2. Connect to the VM:
    1. Toggle the button to start – it might take a while.
    2. Once it changes to Running, click on the monitor icon.
    3. A file will be downloaded – click on it to run it, and you will be prompted to enter the password you created last time. IMPORTANT: the username must be `labuser` (remove the ~/).
-   4. Remember to click on the following icon to make the window resize appropriately <img  src="../assets/resize_icon.png"/>
 
-### Exercise 0.1  : Leveling up our Development Environment
+### Exercise 0.1 : Leveling up our Development Environment
 
 **Setting the Node.js Environment Variable**
 
@@ -60,7 +59,7 @@ First, we will set up an environment variable to run `Node.js` from any terminal
 
 6. To check the installation, in the Window's search bar of your, search for and then select: "power shell". This should open a terminal session. Next type `node -v` into the terminal and press enter. You should see an output along the lines of `v18.8.0`.
 
-Finally, we'll install a better text editor on VM, I recommend VS Code.
+Finally, we'll install a better text editor on the VM, I recommend VS Code.
 
 1. To install VS Code, open a browser and navigate to [https://code.visualstudio.com/](https://code.visualstudio.com/). Download the installer and run it. The default options should be fine.
 
@@ -86,13 +85,15 @@ Now we've leveled up our development environment we can make our first `Node.js`
 1. Type in to the terminal `node exercise_1_0.js` and press enter. Your program should output "hello world".
 1. To stop your program from running, with the terminal in focus, press `Control + c`.
 
-### Exercise 1.1  : Using Variables
+### Exercise 1.1 : Using Variables
 
 We're going to expand on the first exercise and use variables. Pay close attention on how the `+` is used to concatenate(join together) text with variables.
 
 **Let's start the exercise**
 
 1.  Right click on the explorer bar and create the file `exercise_1_1.js`, and type in the below code:
+
+\break
 
 ```JavaScript
 //set up our variables
@@ -109,14 +110,14 @@ console.log("your location is: " + yourLocation);
 
 ```
 
-2. From the terminal window, run your program: `node exercise_1_1.js`. You should see your name and location outputted.
-3. Expand the above program to print out name and location in one `console.log statement`. The output should look like "Hello, Joe, you live in Brighton"
+1. From the terminal window, run your program: `node exercise_1_1.js`. You should see your name and location outputted.
+2. Expand the above program to print out name and location in one `console.log statement`. The output should look like "Hello, Joe, you live in Brighton"
 
 ## 2. Further JavaScript
 
 In this section you'll explore how you can control the flow of your program using conditional statements and loops. Further, we'll look at how to create functions to make our programs more modular.
 
-### Exercise 2.0  : A NodeJS Guessing Game
+### Exercise 2.0 : A NodeJS Guessing Game
 
 In order to code decisions into our JavaScript programs it's necessary to use conditional statements know as `if` statements.
 
@@ -146,7 +147,7 @@ const secretNumber = Math.floor(Math.random() * 10) + 1;
 
 The above code uses the `Math` module to generate a random number between 1 and 10. The `Math.floor` function rounds down to the nearest integer. The `Math.random` function generates a random number between 0 and 1. We multiply this by 10 to get a number between 0 and 10. Finally, we add 1 to get a number between 1 and 10.
 
-3. Next, we need to create an interface to get input from the user. Don't worry too much about the syntax of the below code. Add the following code to your program:
+1. Next, we need to create an interface to get a guess from the user. Don't worry too much about the syntax of the below code. Add the following code to your program:
 
 ```JavaScript
 const rl = readline.createInterface({
@@ -156,9 +157,9 @@ const rl = readline.createInterface({
 
 ```
 
-The above code creates an interface to read input from the terminal. The `rl` variable is assigned to the interface. The `createInterface` function takes an object as an argument. The `input` property is set to `process.stdin` which is the standard input stream. The `output` property is set to `process.stdout` which is the standard output stream. Again, don't worry too much about this, we won't be reading inputs from the stdin again.
+If you are interested, the above code creates an interface to read input from the terminal. The `rl` variable is assigned to the interface. The `createInterface` function takes an object as an argument. The `input` property is set to `process.stdin` which is the standard input stream. The `output` property is set to `process.stdout` which is the standard output stream. Again, don't worry too much about this, we won't be reading inputs from the stdin again.
 
-4. Next, we need to create a function to get input from the user. Next we need to create the main game play loop. Add the following code to your program:
+1. Next, we need to create a function to get input from the user, allowing 5 guesses. Add the following code to your program:
 
 \break
 
@@ -173,7 +174,7 @@ async function guessNumber() {
    // increment the guess count
    guessCount++;
    // at this point the user input is stored in guess and the guess count is stored in guessCount
-   // your code goes here
+   // your code goes here - we'll add this in the next steps
 
   }
 
@@ -185,11 +186,11 @@ async function guessNumber() {
 guessNumber();
 ```
 
-5. As you go along, you should regularly run your program to check that it's working as expected. To run your program, open a vs terminal session and type `node exercise_2_0.js`. To exit your program, press `Control + c`. Give it a go now. You should be prompted to guess a number between 1 and 10, 5 times. After the 5th guess, the program should exit, and you should see the message "Sorry, you ran out of guesses! The secret number was **random number**".
+5. As you go along, you should regularly run your program to check that it's working as expected. To run your program, open a VS code terminal session and type `node exercise_2_0.js`. To exit your program, press `Control + c`. Give it a go now. You should be prompted to guess a number between 1 and 10, 5 times. After the 5th guess, the program should exit, and you should see the message "Sorry, you ran out of guesses! The secret number was **random number**".
 
    1. If your application is not running, check your code matches the code block in the appendix ([see appendix below: Part completed Exercise 2.0](#part-completed-exercise-20))
 
-6. With in the while loop of your program can you add an if else statement to check if the user guess is correct. You should consider the following:
+6. With in the while loop of your program, can you add an if else statement to check if the user guess is correct. You should consider the following:
 
    1. The guess is smaller than the secret number, then run the following line of code: console.log("Too small!")
    2. The guess is larger than the secret number, then run the following line of code: console.log("Too large!")
@@ -202,27 +203,10 @@ guessNumber();
 
    ```
 
+The above task is quite challenging. If you get stuck:
 
-
-<!--
-
-// at this point the user input is stored in guess and the guess count is stored in guessCount
-   // can you add an if else statement here to check if the guess is correct? You should consider the following conditions
-   // 1. The guess is not a number, then run the following line of code: console.log("Not a valid number!")
-   // 2. The guess is smaller than the secret number, then run the following line of code: console.log("Too small!")
-   // 3. The guess is larger than the secret number, then run the following line of code: console.log("Too large!")
-   /* 4. The guess is correct, then run the following lines of code:
-
-   console.log("Correct! You win!");
-   rl.close()
-   return; */
-
-
->
-
-
-
-The above task is quite challenging. If you get stuck, you can find the [solution by clicking here](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-8/solutions/exercise_2_0.js).
+- check the lab notes for guidance. These can be found [here](https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2870387).
+- you can find the [solution by clicking here](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-8/solutions/exercise_2_0.js).
 
 ### Stretch Task
 
@@ -236,8 +220,6 @@ Did you fly through the above exercises? If so, try the following, consider some
 ## Solutions
 
 You can find the solutions to the above exercises [by clicking here](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-8/solutions/). Note, I don't provide solutions to the stretch tasks. If you've completed the stretch tasks, well done! You're doing great!
-
--->
 
 ## Appendix
 
