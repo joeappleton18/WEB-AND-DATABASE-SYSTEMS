@@ -98,6 +98,33 @@ var myString = "bar"; // is a string
 var myBoolean = true; // is a boolean
 ```
 
+
+#### Let and Const 
+
+In JavaScript, you can also use the let and const keywords to declare variables. The let keyword is used to declare variables that can be reassigned, while the const keyword is used to declare variables that cannot be reassigned.
+
+```javascript
+
+let x = 5; // x can be reassigned
+const y = 10; // y cannot be reassigned
+
+```
+Let and const are block-scoped, which means they are only accessible within the block in which they are declared. For example:
+
+```javascript
+if (true) {
+  let x = 5;
+  const y = 10;
+}
+
+console.log(x); // Throws an error
+
+console.log(y); // Throws an error
+```
+
+Normally, it is best practice to use let and const instead of var. This is because let and const are block-scoped, while var is function-scoped.
+
+
 ### Mathematical Operators
 
 You can apply mathematic operations to numbers using some basic operators like:

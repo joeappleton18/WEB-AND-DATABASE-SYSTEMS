@@ -17,6 +17,8 @@ In this lab, you'll learn how to create `Node.js` applications. You'll learn how
 
 To complete the lab, work through the exercises below - please attempt them all. If you get stuck, ask your peers, student helper, or lecturer for help.
 
+You should also download the [lab notes](https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2870387) to help you complete the lab.
+
 ## 0. Getting Started
 
 In this part of the lab, you'll set up your development environment.
@@ -33,11 +35,11 @@ In this part of the lab, you'll set up your development environment.
 
 **Setting the Node.js Environment Variable**
 
-For this part of the module we'll develop slightly larger programs. As such, we need to level up our VMs development environment.
+For this part of the module, we'll develop slightly larger programs. As such, we need to level up our VMs development environment.
 
 **Let's start the exercise**
 
-First, we will set up an environment variable to run `Node.js` from any terminal location. We are only doing this because we are using the Laragon Node.js package. [If you install node through the official way, the environment variable should set for you automatically](https://nodejs.org/en/download).
+Our VM's installation of Laragon should have installed Node.js for us. However, we need to set up an environment variable to run `Node.js` from any terminal location. We are only doing this because we are using the Laragon Node.js package. [If you install node through the official way, the environment variable should set for you automatically](https://nodejs.org/en/download).
 
 1. In the Window's search bar of your VM, search for and then select: System (Control Panel)
 
@@ -57,7 +59,7 @@ First, we will set up an environment variable to run `Node.js` from any terminal
 
 5. In the "Edit environment variable window": click edit and add the following the value `C:\laragon\bin\nodejs\node-v18`. When added, you can click ok.
 
-6. To check the installation, in the Window's search bar of your, search for and then select: "power shell". This should open a terminal session. Next type `node -v` into the terminal and press enter. You should see an output along the lines of `v18.8.0`.
+6. To check the installation, in the Window's search bar of your VM, search for and then select: "power shell". This should open a terminal session. Next, type `node -v` into the terminal and press enter. You should see an output along the lines of `v18.8.0`.
 
 Finally, we'll install a better text editor on the VM, I recommend VS Code.
 
@@ -65,11 +67,14 @@ Finally, we'll install a better text editor on the VM, I recommend VS Code.
 
 ## 1. Creating Node Applications
 
-In this section you'll create your first `Node.js` application. You'll learn how to run your program from the terminal and how to use variables.
+In this section:
+
+- you'll create your first `Node.js` application.
+- you'll learn how to run your program from the terminal and how to use variables.
 
 ### Exercise 1.0 : Creating our first node application
 
-Now we've leveled up our development environment we can make our first `Node.js` application.
+Now we've leveled up our development environment; we can make our first `Node.js` application.
 
 **Let's start the exercise**
 
@@ -77,15 +82,22 @@ Now we've leveled up our development environment we can make our first `Node.js`
 1. If you haven't already, open VS Code on your computer.
 1. In the menu at the top of VS Code, click on "file" -> "open folder". Open your lab_8 folder.
    You should now see the empty directory structure in the explorer bar of your VS code window. If you can't see the explore bar, press `CTRL+b`.
-1. Right click on the explorer bar and create the file `exercise_1_0.js`.
-1. Add the following code to the top of `exercise_1_0.js`:
-   `console.log("hello world")`
-1. Ensure `exercise_1_0.js` is saved.
-1. To run the program open a new terminal session by clicking in the VS code menu `terminal -> new terminal`.
-1. Type in to the terminal `node exercise_1_0.js` and press enter. Your program should output "hello world".
-1. To stop your program from running, with the terminal in focus, press `Control + c`.
 
-### Exercise 1.1 : Using Variables
+1. Right click on the explorer bar and create the file `exercise_1_0.js`.
+
+![](./assets/5.create_file.png)
+
+5. Add the following code to the top of `exercise_1_0.js`:
+   `console.log("Hello World")`
+6. Ensure `exercise_1_0.js` is saved.
+7. To run the program open a new terminal session by clicking in the VS code menu `terminal -> new terminal`.
+8. Type in to the terminal `node exercise_1_0.js` and press enter. Your program should output "hello world".
+
+![](./assets/6.run_node_application.png)
+
+That's it! You've created your first `Node.js` application.
+
+### Exercise 1.1: Using Variables
 
 We're going to expand on the first exercise and use variables. Pay close attention on how the `+` is used to concatenate(join together) text with variables.
 
@@ -117,11 +129,17 @@ console.log("your location is: " + yourLocation);
 
 In this section you'll explore how you can control the flow of your program using conditional statements and loops. Further, we'll look at how to create functions to make our programs more modular.
 
+In this part of the lab, we'll be using `let` and `const` to declare variables, instead of `var`. `let` and `const` are newer ways of declaring variables. They are more flexible and less error prone than `var`. You can read more about the differences between `let`, `const` and `var` in an article written by freecodecamp ([click here](https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/)).
+
+We'll also be exploring conditional statements and functions. You should refer to the lab notes for guidance on these topics ([click here](https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2870387)).
+
 ### Exercise 2.0 : A NodeJS Guessing Game
 
 In order to code decisions into our JavaScript programs it's necessary to use conditional statements know as `if` statements.
 
-The aim of this exercise is to create a JavaScript guessing game. Your program will generate a number between a user defined range. The user will then make guesses with the aim of finding that number. Feedback will be given on if the guess is:
+The aim of this exercise is to create a JavaScript guessing game.
+
+Your program will generate a random number between a user defined range. The user will then make guesses with the aim of finding that number. Feedback will be given on if the guess is:
 
 - Not a valid number!
 - Smaller than the number!
@@ -139,7 +157,7 @@ const readline = require('node:readline/promises');
 
 The above code imports the `readline` module and assigns it to the constant readline. This module allows us to read input from the terminal. We'll use this to get input from the user. The `require` keyword is used to import modules in Node.js.
 
-2. We need a secret number for the player to guess. We'll generate a random number between 1 and 10. Add the following line of code to your program:
+3. We need a secret number for the player to guess. We'll generate a random number between 1 and 10. Add the following line of code to your program:
 
 ```JavaScript
 const secretNumber = Math.floor(Math.random() * 10) + 1;
@@ -147,7 +165,7 @@ const secretNumber = Math.floor(Math.random() * 10) + 1;
 
 The above code uses the `Math` module to generate a random number between 1 and 10. The `Math.floor` function rounds down to the nearest integer. The `Math.random` function generates a random number between 0 and 1. We multiply this by 10 to get a number between 0 and 10. Finally, we add 1 to get a number between 1 and 10.
 
-1. Next, we need to create an interface to get a guess from the user. Don't worry too much about the syntax of the below code. Add the following code to your program:
+4. Next, we need to create an interface to get a guess from the user. Don't worry too much about the syntax of the below code. Add the following code to your program:
 
 ```JavaScript
 const rl = readline.createInterface({
@@ -159,7 +177,7 @@ const rl = readline.createInterface({
 
 If you are interested, the above code creates an interface to read input from the terminal. The `rl` variable is assigned to the interface. The `createInterface` function takes an object as an argument. The `input` property is set to `process.stdin` which is the standard input stream. The `output` property is set to `process.stdout` which is the standard output stream. Again, don't worry too much about this, we won't be reading inputs from the stdin again.
 
-1. Next, we need to create a function to get input from the user, allowing 5 guesses. Add the following code to your program:
+5. Next, we need to create a function to get input from the user, allowing 5 guesses. Add the following code to your program:
 
 \break
 
@@ -186,14 +204,14 @@ async function guessNumber() {
 guessNumber();
 ```
 
-5. As you go along, you should regularly run your program to check that it's working as expected. To run your program, open a VS code terminal session and type `node exercise_2_0.js`. To exit your program, press `Control + c`. Give it a go now. You should be prompted to guess a number between 1 and 10, 5 times. After the 5th guess, the program should exit, and you should see the message "Sorry, you ran out of guesses! The secret number was **random number**".
+6. As you go along, you should regularly run your program to check that it's working as expected. To run your program, open a VS code terminal session and type `node exercise_2_0.js`. To exit your program, press `Control + c`. Give it a go now. You should be prompted to guess a number between 1 and 10, 5 times. After the 5th guess, the program should exit, and you should see the message "Sorry, you ran out of guesses! The secret number was **random number**".
 
    1. If your application is not running, check your code matches the code block in the appendix ([see appendix below: Part completed Exercise 2.0](#part-completed-exercise-20))
 
-6. With in the while loop of your program, can you add an if else statement to check if the user guess is correct. You should consider the following:
+7. With in the while loop of your program, can you add an if else statement to check if the user guess is correct. You should consider the following:
 
-   1. The guess is smaller than the secret number, then run the following line of code: console.log("Too small!")
-   2. The guess is larger than the secret number, then run the following line of code: console.log("Too large!")
+   1. The guess is smaller than the secret number, then run the following line of code: `console.log("Too small!")`
+   2. The guess is larger than the secret number, then run the following line of code: `console.log("Too large!")`
    3. The guess is correct, then run the following lines of code:
 
    ```JavaScript
