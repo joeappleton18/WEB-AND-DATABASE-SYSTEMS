@@ -13,7 +13,17 @@ The notes are written in markdown and can be converted to a pdf using pandoc. To
 - https://pandoc.org/installing.html
 - https://www.latex-project.org/get/
 
-Currently, I am uploading the pdfs to the files page of Surrey's [LMS](https://surreylearn.surrey.ac.uk/d2l/lp/manageFiles/main.d2l?ou=252843)
+To build the notes, run the following command:
+
+```bash
+./build_pdfs.sh
+```
+
+- The above command will generate pdfs for each markdown file. 
+
+- Currently, I am uploading the pdfs to the files page of Surrey's [LMS](https://surreylearn.surrey.ac.uk/d2l/lp/manageFiles/main.d2l?ou=252843)
+
+
 
 ### Vuepress
 

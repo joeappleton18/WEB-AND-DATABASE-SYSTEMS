@@ -10,7 +10,7 @@ for f in week*;  do
 	cd $f
 	for i in *.md; do
 	    echo "Building PDF for $i"
-	    echo "running command: pandoc $i -o "${i%.*}.pdf" --from markdown --template "template.tex" --listing" 
+	    echo "running command: pandoc $i -o "${i%.*}.pdf" --from markdown --template "template.tex" --filter pandoc-latex-environment  --listing" 
 	    pandoc $i -o "${i%.*}.pdf" --from markdown --template "../template.tex" --listing
 	done
 	cd ..
