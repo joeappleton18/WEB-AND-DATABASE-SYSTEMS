@@ -353,6 +353,7 @@ In this module, we will explore one such language, Embedded JavaScript templatin
 1. In the VS Code terminal window, type `npm install ejs` and press enter. You should be used to this by now!
 
 Now you've installed EJS, yo can now tell express to render html pages using ejs. Below is a full example:
+
 \break
 
 ```javascript
