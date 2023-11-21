@@ -8,6 +8,7 @@ lang: "en"
 toc: true
 toc-own-page: false
 colorlinks: true
+listings-disable-line-numbers: true
 header-includes:
   - |
     ```{=latex}
@@ -110,9 +111,14 @@ We can now install the `chalk` package:
 \break
 
 ```javascript
-const chalk = require("chalk"); // Import the chalk package from the node modules_folder, notice how we don't need to use an absolute path.
-
-console.log(chalk.blue("Hello world!")); // Use the chalk package to print a blue message to the console.
+/**
+ * Import the chalk package from the node modules_folder, notice how we don't need to use an absolute path.
+ */
+const chalk = require("chalk");
+/**
+ * Use the chalk package to print a blue message to the console.
+ */
+console.log(chalk.blue("Hello world!"));
 ```
 
 1. In the terminal, type `node exercise_0_3.js` and press enter. You should see a blue message printed to the console. **Try and change the message to green!**
@@ -136,17 +142,27 @@ Let's create a Web Server and try and understand why we need to install Nodemon.
 \break
 
 ```javascript
-const http = require("http"); // Import the http package, this is a core Node.js package so it doesn't need to be installed.
+/**
+ * Import the http package, this is a core Node.js package so it doesn't need to be installed.
+ */
+const http = require("http");
 const server = http.createServer(); // Create a server object.
-const chalk = require("chalk"); // Import the chalk package from the node modules folder; we installed this in the previous exercise.
-
+/**
+ * Import the chalk package from the node modules folder; we installed this in the previous exercise.
+ */
+const chalk = require("chalk");
+/**
+ * Listen for requests and respond with a message. Notice how we are using a trusty arrow function (req,res) => and passing it into sever.on and the second argument.
+ */
 server.on("request", (req, res) => {
-  // Listen for requests and respond with a message. Notice how we are using a trusty arrow function (req,res) => and passing it into sever.on and the second argument.
   res.end("hello world");
 });
 
 server.listen(8000, function () {
-  console.log(chalk.blue("Server is listening on port 8000")); // Print a message to the console when the server starts.
+  /*
+   * Print a message to the console when the server starts.
+   */
+  console.log(chalk.blue("Server is listening on port 8000"));
 });
 ```
 
@@ -200,6 +216,8 @@ From this point on, we are going to be building a simple web application. The en
 2. Next, create the file `index.js`, this will be the entry point to our application.
 3. Add the following code:
 
+\break
+
 ```javascript
 const express = require("express");
 const app = express();
@@ -219,7 +237,7 @@ app.listen(port, () => {
 
 The above example uses the express package to create a new web-server that listens on port 8000 (l.9). We can then set up listeners to respond to any given HTTP request. Above, we listen for a get request to the base URL of our server (l.5).
 
-4. Before we can run the application, we need to update the script tag in the package.json, so that it runs the index.js file. Open the `package.json` file and update the `scripts` section so that it looks like this:
+1. Before we can run the application, we need to update the script tag in the package.json, so that it runs the index.js file. Open the `package.json` file and update the `scripts` section so that it looks like this:
 
 ```json
  "scripts": {
@@ -234,13 +252,15 @@ The above example uses the express package to create a new web-server that liste
 
 6. Add a new route to the application. For example, you could add the following code to the below the your existing route in `index.js`:
 
+\break
+
 ```javascript
 app.get("/about", (req, res) => {
   res.send("This is the about page");
 });
 ```
 
-7. To finish the exercise, create some further routes (e.g., `/contact`, `/about`).
+1. To finish the exercise, create some further routes (e.g., `/contact`, `/about`).
 
 [If you got stuck: Click here to see the solution](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-9/solutions/exercise_1_0)
 
@@ -254,13 +274,19 @@ Express makes serving static files easy. For instance, let's assume that we are 
 
 ```javascript
 const express = require("express");
-const path = require("path"); // Import the path module, this is a core Node.js package so it doesn't need to be installed.
+/**
+ * Import the path module, this is a core Node.js package so it doesn't need to be installed.
+ */
+const path = require("path");
 
 const app = express();
 const port = 8000;
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "index.html")); // serve the index.html file from the root of the project. Notice how we use the path module to resolve the path to the file - this is imported at the top of the file. Using the path module is a good practice as it ensures that the path is correct across different operating systems.
+  /**
+   * serve the index.html file from the root of the project. Notice how we use the path module to resolve the path to the * file - this is imported at the top of the file. Using the path module is a good practice as it ensures that the path * is correct across different operating systems.
+   */
+  res.sendFile(path.resolve(__dirname, "index.html"));
 });
 
 app.listen(port, () => {
@@ -299,7 +325,10 @@ const express = require("express");
 const app = express();
 const port = 8000;
 
-app.use(express.static("public")); // Serve static files from the public folder.
+/**
+ *  Serve static files from the public folder
+ */
+app.use(express.static("public"));.
 
 .... // the rest of your code
 
@@ -318,6 +347,8 @@ So, if we had the following:
 ```
 
 We could reference foo in our index.html page like this:
+
+\break
 
 ```html
 <!DOCTYPE html>
@@ -363,8 +394,15 @@ const app = express();
 const port = 8000;
 const ejs = require("ejs");
 
-app.set("view engine", "ejs"); // we are telling express to use ejs as our view engine. This means that express will look for ejs files in the views folder.
-app.use(express.static("public")); // we are telling express to use the public folder to serve static files. This means that express will look for static files in the public folder.
+/**
+ * we are telling express to use ejs as our view engine. This means that express will look for ejs files in the views folder.
+ */
+app.set("view engine", "ejs");
+
+/**
+ *  we are telling express to use the public folder to serve static files. This means that express will look for static files in the public folder.
+ */
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.render("index");
