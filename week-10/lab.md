@@ -396,7 +396,8 @@ app.get("/students/edit/:id", async (req, res) => {
 });
 ```
 
-Above, we are using the `?` syntax to tell MySQL that we want to use a parameterised query. We then pass the value of the URN parameter as the second parameter of the `query` function. We then inject the student object into the view. We can then access the student object in the view by using the following syntax: `<%= student.<FieldName> %>`.
+Above, we are using the `?` syntax to tell MySQL that we want to use a parameterised query.
+We then pass the value of the URN parameter as the second parameter of the `query` function. We then inject the student object into the view. We can then access the student object in the view by using the following syntax: `<%= student.<FieldName> %>`.
 
 ### Exercise 4.0: Accessing URL parameters
 
@@ -414,7 +415,7 @@ The most common way for users to send data is through HTML forms - you probably 
 
 ### Exercise 4.1: Injecting values into a form
 
-1. First, use the browser navigate to the route: "http://localhost:8000/students/edit/612345"; you should see John Smith's record.
+1. First, use the browser to navigate to the route: "http://localhost:8000/students/edit/612345"; you should see John Smith's record.
    Currently, the form has hard coded data! Let's consider how we can update this. In VS code, open `views/student_edit.ejs`.
 
 2. Navigate to the `<form>` element there are two things we need to consider:
