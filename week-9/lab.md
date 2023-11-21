@@ -103,7 +103,7 @@ To create a `package.json` file:
 
 We can now install the `chalk` package:
 
-1. In the terminal ensure it is pointing to the root of the `lab_9` folder, type `npm install chalk` and press enter. This command installs the `chalk` package and saves it as a dependency in the `package.json` file.
+1. In the terminal ensure it is pointing to the root of the `lab_9` folder, type `npm install chalk@4` and press enter. This command installs the `chalk` package and saves it as a dependency in the `package.json` file.
 2. If all has gone well, you should see that a `node_modules` folder has been created. This folder contains the `chalk` package and any other packages that it depends on. You should also see that the `package.json` file has been updated to include `chalk` in the list of dependencies. Finally, you should see a `package-lock.json` file has been created. **Note,** you never need to edit these files or directories. They are created and updated automatically by `npm`.
    1. You should not edit the contents of the `node_modules` folders; you can, however, delete it and run `npm install` to reinstall all of the packages that your project depends on. As such, there is **you should not commit this folder to your git repository or submit it as part of your assessment**.
 3. We will now use chalk. In the `lab_9` folder, create a file called `exercise_0_3.js`. Add the following code to the file:
