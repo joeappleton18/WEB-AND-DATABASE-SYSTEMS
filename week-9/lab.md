@@ -30,6 +30,7 @@ pandoc-latex-environment:
 
 In this lab, you'll construct a simple web application. You'll use the Express framework to create a web server, and you'll use `ejs` templates to create templated web pages.
 
+
 ## A Quick Recap
 
 Last week, we created some simple JavaScript programs. We ran these programs in the Node.js environment. For instance, the following program prints "Hello World" to the console:
