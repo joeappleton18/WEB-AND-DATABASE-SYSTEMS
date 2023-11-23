@@ -69,10 +69,16 @@ app.get('/students/edit/:id', async (req, res) => {
 });
 
 
+app.get('/students/view/:id', async (req, res) => {
+	const student = await connection.query('SELECT * FROM Student INNER JOIN Course  ON student.Stu_Course = course.Crs_Code WHERE URN = ?', [req.params.id]);
+	res.render('student_view', { student: student[0] });
+});
+
 app.post('/students/edit/:id', async (req, res) => {
 
 	console.log(req.body);
 });
+
 
 app.listen(PORT, () => {
 	console.log(`Example app listening at http://localhost:${PORT}`);
