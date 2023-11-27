@@ -474,7 +474,7 @@ Take a look at `views/student_view.ejs`. You should and see how we are using the
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_3_1)**
 
-**At this point, you may want to take a break, and complete the next section in your own time. By the end of week 10, I'll release a video that will walk you through the solution.**
+**At this point, you may want to take a break, and complete the next section in your own time. By the end of week 10, I'll release a video that will walk you through the solution. Further,to this the first hour of week-11 will be dedicated to supporting you in completing the final task**
 
 ## 4.0 Updating data
 

@@ -31,22 +31,24 @@
 					<th> Type </th>
 					<th> Actions </th>
 				</tr>
-
-				<% students.forEach(student=> { %>
-					<tr>
-						<td> <%- student.URN %> </td>
-						<td> <%- student.Stu_FName %> </td>
-						<td> <%- student.Stu_LName %></td>
-						<td> <%- student.Stu_DOB %> </td>
-						<td> <%- student.Stu_Gender %> </td>
-						<td> <%- student.Stu_Phone %> </td>
-						<td> <%- student.Crs_Title %> </td>
-						<td> <%- student.Stu_Type %> </td>
-						<td> <a href="/students/edit/<%- student.URN %>"> Edit </a> | <a
-								href="/students/view/<%- student.URN %>"> View </a>|
-						</td>
+				<tr>
+					<% students.forEach(student=> { %>
+				<tr>
+					<td><%- student.URN %></td>
+					<td><%- student.Stu_FName %></td>
+					<td><%- student.Stu_LName %></td>
+					<td><%- student.Stu_DOB %></td>
+					<td><%- student.Stu_Gender %></td>
+					<td><%- student.Stu_Phone %></td>
+					<td><%- student.Crs_Title %></td>
+					<td><%- student.Stu_Type %></td>
+					<td><a href="/students/edit/<%- student.URN %>"> Edit </a> <a
+							href="/students/view/<%- student.URN %>"> View </a></td>
+				</tr>
+				<% }) %>
 					</tr>
-					<% }) %>
+
+
 
 
 

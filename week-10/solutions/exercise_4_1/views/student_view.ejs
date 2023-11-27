@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/main.css">
+	<title>Dash</title>
+</head>
+
+<body>
+
+	<div class="content">
+		<ul class="breadcrumbs">
+			<li> <a href="/"> Dash</a> </li>
+			<li> / </li>
+			<li> <a href="/students">Students</a> </li>
+			<li> / </li>
+			<li> Update </li>
+		</ul>
+		<h1>
+			<h1> <%- student.Stu_FName %> <%- student.Stu_LName %> </h1>
+			<ul>
+				<li> URN: <%- student.URN %> </li>
+				<li> DOB: <%- student.Stu_DOB %> </li>
+				<li> Course: <%- student.Crs_Title %> </li>
+				<li> Gender: <%- student.Stu_Gender %> </li>
+				<li> Phone: <%- student.Stu_Phone %> </li>
+				<li> Type: <%- student.Stu_Type %> </li>
+			</ul>
+		</h1>
+
+	</div>
+
+</body>
+
+</html>

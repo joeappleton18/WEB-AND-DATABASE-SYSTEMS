@@ -58,6 +58,13 @@ app.get('/students', async (req, res) => {
 	res.render('students', { students: students });
 });
 
+app.get("/students/view/:id", async (req, res) => {
+	const student = await connection.query(
+		"SELECT * FROM Student INNER JOIN Course  ON student.Stu_Course = course.Crs_Code WHERE URN = ?",
+		[req.params.id]
+	);
+	res.render("student_view", { student: student[0] });
+});
 
 app.get('/students/edit/:id', async (req, res) => {
 	const student = await connection.query('SELECT * FROM Student WHERE URN = ?', [req.params.id]);
