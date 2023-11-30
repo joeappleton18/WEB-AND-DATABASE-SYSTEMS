@@ -18,31 +18,30 @@
 			<li> / </li>
 			<li> Update </li>
 		</ul>
-		<h1>
-			<h1> Edit <%- student.Stu_FName %> <%- student.Stu_LName %> </h1>
-			<h3>
-				<%= message %>
-					<form method="post" class="edit_form">
+		<h1> Edit <%- student.Stu_FName %> <%- student.Stu_LName %> </h1>
+		<h3>
+			<%= message %>
+				<form method="post" class="edit_form">
 
-						<label for="course">Update Course: </label>
-						<select class="form-control" name="Stu_Course" id="course" required>
-							<% courses.forEach( course => { %>
-								<option value="<%= course.Crs_Code %>"
-									<%=course.Crs_Code===student.Stu_Course
-									? 'selected' : "" %>>
+					<label for="course">Update Course: </label>
+					<select class="form-control" name="Stu_Course" id="course" required>
+						<% courses.forEach( course=> { %>
+							<option value="<%= course.Crs_Code %>"
+								<%=course.Crs_Code===student.Stu_Course ? 'selected'
+								: "" %>>
 
-									<%= course.Crs_Title %>
-								</option>
-								<% }) %>
-						</select></p>
-						<p> <label for="Stu_Phone"> Update Phone: </label> <input type="tel"
-								value="<%= student.Stu_Phone %>" name="Stu_Phone"
-								required></p>
-						<input type="submit" value="Update">
+								<%= course.Crs_Title %>
+							</option>
+							<% }) %>
+
+					</select></p>
+					<p> <label for="Stu_Phone"> Update Phone: </label> <input type="tel"
+							value="<%- student.Stu_Phone%>" name="Stu_Phone" required> </p>
+					<input type="submit" value="Update">
 
 
-					</form>
-		</h1>
+				</form>
+				</h1>
 
 	</div>
 

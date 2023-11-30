@@ -114,9 +114,9 @@ Let's set up the database we'll use for this lab.
 1. In the Laragon terminal load the database by running the following commands (ensure, if you copy and past the commands, there are no spaces - it's a good idea to type them out):
 
    1. Navigate the the MySQL bin folder:
-      `cd C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin`
+      - `cd C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin`
    2. Run the command below to run the database script:
-      `mysql -u root -p < C:\code\lab_10\seeds\university.sql`
+      -  `mysql -u root -p < C:\code\lab_10\seeds\university.sql`
    3. You'll be prompted for a password, just press enter.
    4. To check the database has been created:
       1. From the terminal run: `mysql -u root -p`
@@ -474,7 +474,7 @@ Take a look at `views/student_view.ejs`. You should and see how we are using the
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_3_1)**
 
-**At this point, you may want to take a break, and complete the next section in your own time. By the end of week 10, I'll release a video that will walk you through the solution. Further,to this the first hour of week-11 will be dedicated to supporting you in completing the final task**
+**At this point, you may want to take a break, and complete the next section in your own time. By the end of week 10, I'll release a video that will walk you through the solution. Further to this, the first hour of week-11 will be dedicated to supporting you in completing the final task**
 
 ## 4.0 Updating data
 
@@ -520,13 +520,13 @@ The most common way for users to send data is through HTML forms - you probably 
 
 1. First, in your VM's browser to navigate to the route: "http://localhost:8000/students/edit/612345"; you should see John Smith's record.
 
-Currently, the form has hard coded data! Let's consider how we can update this. In VS code, open `views/student_edit.ejs`.
+Currently, the form has hard coded data! Let's consider how we can update this.
 
-2. Navigate to the `<form>` element there are two things we need to consider:
+2. In VS code, open `views/student_edit.ejs`.  Navigate to the `<form>` element there are two things we need to consider:
 
-   1. The first is the `method` attribute in the form tag: `<form method="post" class="edit_form">` in this instance it is post. This tells the browser that we want to send a POST request to the server. We could add an optional, `action` attribute to the form tag. This tells the browser where to send the request. If we don't specify an action, the browser will send the request to the current route. In this case, it will send the request to the current url (e.g., `/students/edit/612345`,).
+   1. The first is the `method` attribute in the form tag: `<form method="post" class="edit_form">` in this instance it is post. This tells the browser that we want to send a POST request to the server. We could add an optional, `action` attribute to the form tag. This tells the browser where to send the request. If we don't specify an action, the browser will send the request to the current route. In this case, it will send the request to the current url (e.g., `/students/edit/612345`).
    2. The second is how we embed values into the form. Consider the following: `<input type="tel" value="19129129129" name="Stu_Phone" required>`. There are some important things to note here:
-      - The `value` attribute is used to set the value of the input. In this case, we are hard coding the value.
+      - The `value` attribute is used to set the value of the input. In this case, we are hard coding the value to "19129129129", we will need to update this later.  
       - The `name` attribute is used to give the input a name. The name should match the name of the field in the database. In this case, we are using the `Stu_Phone` field.
       - The `required` attribute is used to tell the browser that the input is required. If the user tries to submit the form without filling in the input, the browser will display an error message.
 
@@ -534,7 +534,7 @@ Currently, the form has hard coded data! Let's consider how we can update this. 
 
 Ok, so we've managed to inject the student's phone number into the form; however, we now need to consider the course they are taking, this is a little more tricky. You'll notice the course the student is taking is a foreign key (e.g, 211). This key relates to the course code in the course table.
 
-Since we don't want to just display a course number to the user, we need to get the pass a list of courses into our edit view.
+Since we don't want to just display a course number to the user, we need to pass all the rows from our course table into our `/students/edit/:id` view.
 
 If you open `index.js`, you'll notice we are currently just passing in a blank courses array (`[]`) to the view.
 
@@ -570,9 +570,9 @@ Now we have the courses in the view, we need to display them in the form. To do 
 
 Notice how we use the `<%= %>` syntax to inject the course code and course title into the option tag.
 We also use a ternary operator (`<%=course.Crs_Code===student.Stu_Course ? 'selected'
-								: "" %>`) to check if the course code matches the student's course code. If it does, we add the `selected` attribute to the option tag. This tells the browser to select the option.
+								: "" %>`) to check if the course code matches the student's course code. If it does, we add the `selected` attribute to the option tag. This tells the browser to select the option. Take some time to understand the above code, it's a little tricky.
 
-5. Update the `views/student_edit.ejs` file to display the courses in the form. Once you've done this, the correct course should be selected when you visit the edit page for any student. **Note,** make sure you remove the currently hard coded courses.
+1. Update the `views/student_edit.ejs` file to display the courses in the form. Specifically, you'll need to update the body of the select tag. Once you've done this, you should see the student's course selected when you visit the edit page. **Note,** make sure you remove the currently hard coded courses.
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_1)**
 
@@ -582,7 +582,7 @@ We are nearly there! We can now display the data in the form. The final step is 
 
 ### Exercise 4.2: Processing a Post request
 
-1. First, we need to add a route to handle the post request. Open the `index.js` file and add the following code:
+1. First, we need to add a route to handle the post request. Open the `index.js` file and add the following new route:
 
 ```javascript
 app.post("/students/edit/:id", async (req, res) => {
@@ -592,9 +592,10 @@ app.post("/students/edit/:id", async (req, res) => {
 
 > > `index.js`
 
-2. Use the above example to update `index.js` to handle a post request from the form.
-3. Submit the form (press the update button on the update page), and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because we need to tell Express to parse are form values and attache them the HTTP request. To do this we first need to install the `body-parser` middleware package.
-4. In the terminal, run the following command:
+
+1. Submit the form (press the update button on the update page), and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because we need to tell Express to parse our form values and attache them to the HTTP request. To do this we first need to install the `body-parser` middleware package.
+   
+2. In the terminal, run the following command:
 
 ```bash
 npm install body-parser
@@ -606,13 +607,16 @@ npm install body-parser
 // at the top of the file
 const bodyParser = require('body-parser');
 
-...
-// below the other use statements
+...  // this means there is code here, I've removed it for brevity
+
+// below the other use statement (e.g., app.use(express.static('public'));), towards the top of the file, 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 ```
 
 > > index.js
+
+It may be worth quickly checking the [solution](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_4_2), and ensure you've added the above code in the correct places.
 
 6. Now update your `post` route to print out the request body, and you should see the form values in the terminal when you submit the form:
 
@@ -631,7 +635,7 @@ We are now ready to update the database with the form values. The flow will look
 1. The browser sends a POST request to the server.
 2. The server parses the body of the request and gets the form values.
 3. The server updates the database.
-4. The server re-renders the edit page with the updated student.
+4. The server re-renders the edit page with the updated student, and passes in a message to tell the user the student has been updated.
 
 Let's get going!
 
