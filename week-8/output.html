@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$title$</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        padding: 2rem;
+      }
+
+      pre {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container"><!-- ---
+title: "Introduction to JavaScript: Lab"
+author: [Joe Appleton]
+date: "17-10-2023"
+subject: "Lab"
+keywords: [Lab]
+lang: "en"
+toc: true
+toc-own-page: false
+... -->
+
+<h1>Lab 8: Introduction to JavaScript</h1>
+<h2>Introduction</h2>
+<p>In this lab, you&#39;ll learn how to create <code>Node.js</code> applications. You&#39;ll learn how to run your programs from the terminal and how to use variables. Further, you&#39;ll learn how to control the flow of your program using conditional statements and loops. Finally, you&#39;ll learn how to create functions to make your programs more modular.</p>
+<p>To complete the lab, work through the exercises below - please attempt them all. If you get stuck, ask your peers, student helper, or lecturer for help.</p>
+<p>You should also download the <a href="./lab-notes.pdf" target="_blank">lab notes</a> to help you complete the lab.</p>
+<h2>Lab Solutions</h2>
+<p><a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-8/solutions" target="_blank">The solutions to the lab can be found here</a>. You should, however, ensure that you attempt each exercise before you attempt the solutions.</p>
+<h2>0. Getting Started</h2>
+<p>In this part of the lab, you&#39;ll set up your development environment.</p>
+<h3>Exercise 0.0 : Installing Node.js</h3>
+<p>In order to complete this lab, you&#39;ll need to install <code>Node.js</code> on the lab computer. <code>Node.js</code> is a JavaScript runtime that allows you to run JavaScript code outside of a web browser. <a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/267643/topics/3179365" target="_blank">You can follow the instructions here to install node on either your own or the lab computer</a></p>
+<h2>1. Creating Node Applications</h2>
+<p>In this section:</p>
+<ul>
+<li>you&#39;ll create your first <code>Node.js</code> application.</li>
+<li>you&#39;ll learn how to run your program from the terminal and how to use variables.</li>
+</ul>
+<h3>Exercise 1.0 : Creating our first node application</h3>
+<p>Now we&#39;ve leveled up our development environment; we can make our first <code>Node.js</code> application.</p>
+<p><strong>Let&#39;s start the exercise</strong></p>
+<div class="alert alert-primary" role="alert">
+ This exercise assumes you have `Node.js` installed on your computer. If you haven't installed `Node.js`, please refer to the steps in the previous exercise.
+
+<p>Further, if you haven&#39;t already, open VS Code on your computer. VS code is already installed on the lab computers. If you are using your own computer, you can download VS code <a href="https://code.visualstudio.com/" target="_blank">here</a>.</p>
+</div>
+
+<ol>
+<li><p>Create a folder in your called <code>lab_8</code>. It&#39;s worth creating this folder in something like a <code>WEB-AND-DATABASE-SYSTEMS</code> directory.</p>
+</li>
+<li><p>If you haven&#39;t already, open VS Code on your computer.</p>
+</li>
+<li><p>In the menu at the top of VS Code, click on &quot;file&quot; -&gt; &quot;open folder&quot;. Open your lab_8 folder.<br>You should now see the empty directory structure in the explorer bar of your VS code window. If you can&#39;t see the explore bar, press <code>CTRL+b</code>.</p>
+</li>
+<li><p>Right click on the explorer bar and create the file <code>exercise_1_0.js</code>.</p>
+</li>
+</ol>
+<p><img src="5.create_file.png" alt=""></p>
+<ol>
+<li>Add the following code to the top of <code>exercise_1_0.js</code>:<br><code>console.log(&quot;Hello World&quot;)</code></li>
+<li>Ensure <code>exercise_1_0.js</code> is saved.</li>
+<li>To run the program open a new terminal session by clicking in the VS code menu <code>terminal -&gt; new terminal</code>.</li>
+<li>Type in to the terminal <code>node exercise_1_0.js</code> and press enter. Your program should output &quot;hello world&quot;.</li>
+</ol>
+<p><img src="6.run_node_application.png" alt=""></p>
+<p>That&#39;s it! You&#39;ve created your first <code>Node.js</code> application.</p>
+<h3>Exercise 1.1: Using Variables</h3>
+<p>We&#39;re going to expand on the first exercise and use variables. Pay close attention on how the <code>+</code> is used to concatenate(join together) text with variables.</p>
+<p><strong>Let&#39;s start the exercise</strong></p>
+<ol>
+<li>Right click on the explorer bar and create the file <code>exercise_1_1.js</code>, and type in the below code:</li>
+</ol>
+<pre><code class="language-JavaScript">//set up our variables
+var yourName;
+var yourLocation;
+
+// assign variable
+yourName = &quot;Joe&quot;;
+yourLocation = &quot;Brighton&quot;;
+
+// output variable
+console.log(&quot;your name is: &quot; + yourName);
+console.log(&quot;your location is: &quot; + yourLocation);
+</code></pre>
+<ol>
+<li>From the terminal window, run your program: <code>node exercise_1_1.js</code>. You should see your name and location outputted.</li>
+<li>Expand the above program to print out name and location in one <code>console.log statement</code>. The output should look like &quot;Hello, Joe, you live in Brighton&quot;</li>
+</ol>
+<h2>2. Further JavaScript</h2>
+<p>In this section you&#39;ll explore how you can control the flow of your program using conditional statements and loops. Further, we&#39;ll look at how to create functions to make our programs more modular.</p>
+<p>In this part of the lab, we&#39;ll be using <code>let</code> and <code>const</code> to declare variables, instead of <code>var</code>. <code>let</code> and <code>const</code> are newer ways of declaring variables. They are more flexible and less error prone than <code>var</code>. You can read more about the differences between <code>let</code>, <code>const</code> and <code>var</code> in an article written by freecodecamp (<a href="https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/" target="_blank">click here</a>).</p>
+<p>We&#39;ll also be exploring conditional statements and functions. You should refer to the lab notes for guidance on these topics (<a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2870387" target="_blank">click here</a>).</p>
+<h3>Exercise 2.0 : A NodeJS Guessing Game</h3>
+<p>In order to code decisions into our JavaScript programs it&#39;s necessary to use conditional statements know as <code>if</code> statements.</p>
+<p>The aim of this exercise is to create a JavaScript guessing game.</p>
+<p>Your program will generate a random number between a user defined range. The user will then make guesses with the aim of finding that number. Feedback will be given on if the guess is:</p>
+<ul>
+<li>Not a valid number!</li>
+<li>Smaller than the number!</li>
+<li>Larger than the number!</li>
+<li>An exact match!</li>
+</ul>
+<p><strong>lets start the exercise</strong></p>
+<ol>
+<li>Right click on the explorer bar and create the file <code>exercise_2_0.js</code>.</li>
+<li>Add the following code to the top of <code>exercise_2_0.js</code>:</li>
+</ol>
+<pre><code class="language-JavaScript">const readline = require(&#39;node:readline/promises&#39;);
+</code></pre>
+<p>The above code imports the <code>readline</code> module and assigns it to the constant readline. This module allows us to read input from the terminal. We&#39;ll use this to get input from the user. The <code>require</code> keyword is used to import modules in Node.js.</p>
+<ol start="3">
+<li>We need a secret number for the player to guess. We&#39;ll generate a random number between 1 and 10. Add the following line of code to your program:</li>
+</ol>
+<pre><code class="language-JavaScript">const secretNumber = Math.floor(Math.random() * 10) + 1;
+</code></pre>
+<p>The above code uses the <code>Math</code> module to generate a random number between 1 and 10. The <code>Math.floor</code> function rounds down to the nearest integer. The <code>Math.random</code> function generates a random number between 0 and 1. We multiply this by 10 to get a number between 0 and 10. Finally, we add 1 to get a number between 1 and 10.</p>
+<ol start="4">
+<li>Next, we need to create an interface to get a guess from the user. Don&#39;t worry too much about the syntax of the below code. Add the following code to your program:</li>
+</ol>
+<pre><code class="language-JavaScript">const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
+</code></pre>
+<p>If you are interested, the above code creates an interface to read input from the terminal. The <code>rl</code> variable is assigned to the interface. The <code>createInterface</code> function takes an object as an argument. The <code>input</code> property is set to <code>process.stdin</code> which is the standard input stream. The <code>output</code> property is set to <code>process.stdout</code> which is the standard output stream. Again, don&#39;t worry too much about this, we won&#39;t be reading inputs from the stdin again.</p>
+<ol start="5">
+<li>Next, we need to create a function to get input from the user, allowing 5 guesses. Add the following code to your program:</li>
+</ol>
+<pre><code class="language-JavaScript">async function guessNumber() {
+  let guessCount = 0;
+  while (guessCount &lt; 5) {
+    // Ask the user for a guess
+   let answer = await rl.question(&#39;Guess a number between 1 and 10: &#39;);
+   // Convert the answer to a number
+	let guess = parseInt(answer);
+   // increment the guess count
+   guessCount++;
+   // at this point the user input is stored in guess and the guess count is stored in guessCount
+   // your code goes here - we&#39;ll add this in the next steps
+
+  }
+
+  console.log(&#39;Sorry, you ran out of guesses!&#39;, `The secret number was ${secretNumber}`);
+  rl.close();
+
+}
+
+guessNumber();
+</code></pre>
+<ol start="6">
+<li><p>As you go along, you should regularly run your program to check that it&#39;s working as expected. To run your program, open a VS code terminal session and type <code>node exercise_2_0.js</code>. To exit your program, press <code>Control + c</code>. Give it a go now. You should be prompted to guess a number between 1 and 10, 5 times. After the 5th guess, the program should exit, and you should see the message &quot;Sorry, you ran out of guesses! The secret number was <strong>random number</strong>&quot;.</p>
+<ol>
+<li>If your application is not running, check your code matches the code block in the appendix (<a href="#part-completed-exercise-20" target="_blank">see appendix below: Part completed Exercise 2.0</a>)</li>
+</ol>
+</li>
+<li><p>With in the while loop of your program, can you add an if else statement to check if the user guess is correct. You should consider the following:</p>
+<ol>
+<li>The guess is smaller than the secret number, then run the following line of code: <code>console.log(&quot;Too small!&quot;)</code></li>
+<li>The guess is larger than the secret number, then run the following line of code: <code>console.log(&quot;Too large!&quot;)</code></li>
+<li>The guess is correct, then run the following lines of code:</li>
+</ol>
+<pre><code class="language-JavaScript">console.log(&quot;Correct! You win!&quot;);
+rl.close()
+return;
+</code></pre>
+</li>
+</ol>
+<p>The above task is quite challenging. If you get stuck:</p>
+<ul>
+<li>check the lab notes for guidance. These can be found <a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2870387" target="_blank">here</a>.</li>
+<li>you can find the <a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-8/solutions/exercise_2_0.js" target="_blank">solution by clicking here</a>.</li>
+</ul>
+<h3>Stretch Task</h3>
+<p>Did you fly through the above exercises? If so, try the following, consider some of the following, <strong>optional</strong>, improvements:</p>
+<ol>
+<li>Add a check to ensure the user enters a number between 1 and 10.</li>
+<li>Add a check to ensure the user doesn&#39;t enter the same number twice.</li>
+<li>Can you allow the user to choose the range of numbers to guess from?</li>
+<li>Can you allow the user to choose the number of guesses they have?</li>
+</ol>
+<h2>Solutions</h2>
+<p>You can find the solutions to the above exercises <a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-8/solutions/" target="_blank">by clicking here</a>. Note, I don&#39;t provide solutions to the stretch tasks. If you&#39;ve completed the stretch tasks, well done! You&#39;re doing great!</p>
+<h2>Appendix</h2>
+<h3>Part completed exercise 2.0</h3>
+<pre><code class="language-JavaScript">
+const readline = require(&#39;node:readline/promises&#39;);
+const secretNumber = Math.floor(Math.random() * 10) + 1;
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+
+async function guessNumber() {
+  let guessCount = 0;
+  while (guessCount &lt; 6) {
+    // Ask the user for a guess
+    let answer = await rl.question(&#39;Guess a number between 1 and 10: &#39;);
+    // Convert the answer to a number
+    let guess = parseInt(answer);
+    // increment the guess count
+    guessCount++;
+
+    // your code goes here
+
+  }
+
+  console.log(&#39;Sorry, you ran out of guesses!&#39;, `The secret number was ${secretNumber}`);
+  rl.close();
+
+}
+
+guessNumber();
+
+
+</code></pre>
+</div>
+  </body>
+</html>

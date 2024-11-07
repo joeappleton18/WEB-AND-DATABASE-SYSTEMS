@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "Introduction to JavaScript: Lab"
 author: [Joe Appleton]
 date: "17-10-2023"
@@ -7,7 +7,7 @@ keywords: [Lab]
 lang: "en"
 toc: true
 toc-own-page: false
-...
+... -->
 
 # Lab 8: Introduction to JavaScript
 
@@ -17,53 +17,19 @@ In this lab, you'll learn how to create `Node.js` applications. You'll learn how
 
 To complete the lab, work through the exercises below - please attempt them all. If you get stuck, ask your peers, student helper, or lecturer for help.
 
-You should also download the [lab notes](https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2870387) to help you complete the lab.
+You should also download the [lab notes](./lab-notes.pdf) to help you complete the lab.
+
+## Lab Solutions
+
+[The solutions to the lab can be found here](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-8/solutions). You should, however, ensure that you attempt each exercise before you attempt the solutions.
 
 ## 0. Getting Started
 
 In this part of the lab, you'll set up your development environment.
 
-### Exercise 0.0 : Loading the Virtual Machine
+### Exercise 0.0 : Installing Node.js
 
-1. As always, start and connect to your Azure Labs' virtual machine (VM) by visiting this link: [https://labs.azure.com/virtualmachines](https://labs.azure.com/virtualmachines).
-2. Connect to the VM:
-   1. Toggle the button to start – it might take a while.
-   2. Once it changes to Running, click on the monitor icon.
-   3. A file will be downloaded – click on it to run it, and you will be prompted to enter the password you created last time. IMPORTANT: the username must be `labuser` (remove the ~/).
-
-### Exercise 0.1 : Leveling up our Development Environment
-
-**Setting the Node.js Environment Variable**
-
-For this part of the module, we'll develop slightly larger programs. As such, we need to level up our VMs development environment.
-
-**Let's start the exercise**
-
-Our VM's installation of Laragon should have installed Node.js for us. However, we need to set up an environment variable to run `Node.js` from any terminal location. We are only doing this because we are using the Laragon Node.js package. [If you install node through the official way, the environment variable should set for you automatically](https://nodejs.org/en/download).
-
-1. In the Window's search bar of your VM, search for and then select: System (Control Panel)
-
-![The Windows](./assets/1.Explorer.png)
-
-2. When the control panel is open stat typing "environment" into the search box at the top of the window, and click "Edit the system environment variables".
-
-![](./assets/2.access_environment_variables.png)
-
-3. Click on the `Environment Variables button located the system properties window.
-
-![](./assets/3.edit_enviroment_variable.png)
-
-4. In the "Environment Variables Window": select "Path" the click "Edit".
-
-![](./assets/4.add_environment_variable.png)
-
-5. In the "Edit environment variable window": click edit and add the following the value `C:\laragon\bin\nodejs\node-v18`. When added, you can click ok.
-
-6. To check the installation, in the Window's search bar of your VM, search for and then select: "power shell". This should open a terminal session. Next, type `node -v` into the terminal and press enter. You should see an output along the lines of `v18.8.0`.
-
-Finally, we'll install a better text editor on the VM, I recommend VS Code.
-
-1. To install VS Code, open a browser and navigate to [https://code.visualstudio.com/](https://code.visualstudio.com/). Download the installer and run it. The default options should be fine.
+In order to complete this lab, you'll need to install `Node.js` on the lab computer. `Node.js` is a JavaScript runtime that allows you to run JavaScript code outside of a web browser. [You can follow the instructions here to install node on either your own or the lab computer](https://surreylearn.surrey.ac.uk/d2l/le/lessons/267643/topics/3179365)
 
 ## 1. Creating Node Applications
 
@@ -78,22 +44,29 @@ Now we've leveled up our development environment; we can make our first `Node.js
 
 **Let's start the exercise**
 
-1. Within your VM, create a folder in your `C:\code` directory called `lab_8`.
-1. If you haven't already, open VS Code on your computer.
-1. In the menu at the top of VS Code, click on "file" -> "open folder". Open your lab_8 folder.
+<div class="alert alert-primary" role="alert">
+ This exercise assumes you have `Node.js` installed on your computer. If you haven't installed `Node.js`, please refer to the steps in the previous exercise.
+
+Further, if you haven't already, open VS Code on your computer. VS code is already installed on the lab computers. If you are using your own computer, you can download VS code [here](https://code.visualstudio.com/).
+
+</div>
+
+1. Create a folder in your called `lab_8`. It's worth creating this folder in something like a `WEB-AND-DATABASE-SYSTEMS` directory.
+2. If you haven't already, open VS Code on your computer.
+3. In the menu at the top of VS Code, click on "file" -> "open folder". Open your lab_8 folder.
    You should now see the empty directory structure in the explorer bar of your VS code window. If you can't see the explore bar, press `CTRL+b`.
 
-1. Right click on the explorer bar and create the file `exercise_1_0.js`.
+4. Right click on the explorer bar and create the file `exercise_1_0.js`.
 
-![](./assets/5.create_file.png)
+![](5.create_file.png)
 
-5. Add the following code to the top of `exercise_1_0.js`:
+1. Add the following code to the top of `exercise_1_0.js`:
    `console.log("Hello World")`
-6. Ensure `exercise_1_0.js` is saved.
-7. To run the program open a new terminal session by clicking in the VS code menu `terminal -> new terminal`.
-8. Type in to the terminal `node exercise_1_0.js` and press enter. Your program should output "hello world".
+2. Ensure `exercise_1_0.js` is saved.
+3. To run the program open a new terminal session by clicking in the VS code menu `terminal -> new terminal`.
+4. Type in to the terminal `node exercise_1_0.js` and press enter. Your program should output "hello world".
 
-![](./assets/6.run_node_application.png)
+![](6.run_node_application.png)
 
 That's it! You've created your first `Node.js` application.
 
@@ -104,8 +77,6 @@ We're going to expand on the first exercise and use variables. Pay close attenti
 **Let's start the exercise**
 
 1.  Right click on the explorer bar and create the file `exercise_1_1.js`, and type in the below code:
-
-\break
 
 ```JavaScript
 //set up our variables
@@ -179,8 +150,6 @@ If you are interested, the above code creates an interface to read input from th
 
 5. Next, we need to create a function to get input from the user, allowing 5 guesses. Add the following code to your program:
 
-\break
-
 ```JavaScript
 async function guessNumber() {
   let guessCount = 0;
@@ -240,8 +209,6 @@ Did you fly through the above exercises? If so, try the following, consider some
 You can find the solutions to the above exercises [by clicking here](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-8/solutions/). Note, I don't provide solutions to the stretch tasks. If you've completed the stretch tasks, well done! You're doing great!
 
 ## Appendix
-
-\break
 
 ### Part completed exercise 2.0
 
