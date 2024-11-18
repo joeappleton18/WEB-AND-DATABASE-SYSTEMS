@@ -43,28 +43,16 @@ If you are working along from home, you won't need to set the path; however, you
 
 In this part of the lab, we'll get set up and get the starter code.
 
-### Exercise 0.1 : Getting Started
+<div class="alert alert-warning">
 
-1. As always, start and connect to your Azure Labs' virtual machine (VM) by visiting this link: [https://labs.azure.com/virtualmachines](https://labs.azure.com/virtualmachines).
-1. Connect to the VM:
-   1. Toggle the button to start – it might take a while.
-   2. Once it changes to Running, click on the monitor icon.
-   3. A file will be downloaded – click on it to run it, and you will be prompted to enter the password you created last time. IMPORTANT: the username must be `labuser` (remove the ~/).
-   4. Remember to click on the following icon to make the window resize appropriately <img  src="../assets/resize_icon.png"/>
-1. Within your VM, create a folder in your `C:\code` directory called `lab_10`.
-
-![](./assets/8.Laragon_desktop.png)
-
-4. Open Laragon and start all services.
-5. Open VS Code and open the `lab_10` folder.
-
+Ensure you have NodeJS set up on the computer you are using. We did this last week, check here if you have not done it. 
 ### Exercise 0.2: Getting the starter code
 
-This week, I've provided you with some starter code. We'll use git to get this code. Git is installed with Laragon, so we can use the Laragon terminal to get the code.
+This week, I've provided you with some starter code. We'll use git to get this code.
 
 ![](./assets/11.open_terminal.png)
 
-1. Within your VM, open the Laragon terminal.
+1. Within your VM, open the a terminal window.
 2. Navigate to the `lab_10` folder you created earlier: `cd C:\code\lab_10`, and run the following command (**don't forget the `.` at the end, this tells git to clone the code into the current directory**):
 
    `git clone https://github.com/joeappleton18/w-d-l-10.git .`

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$title$</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        padding: 2rem;
+      }
+
+      pre {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container"><h1>Lab 9: Node.js and Express</h1>
+<p><img src="./outcome.png" alt=""></p>
+<p><em style="color:#A9A9A9"> This is what we&#39;ll be building. </em></p>
+<p>In this lab, you&#39;ll construct a simple web application. You&#39;ll use the Express framework to create a web server, and you&#39;ll use <code>ejs</code> templates to create templated web pages.</p>
+<h2>A Quick Recap</h2>
+<p>Last week, we created some simple JavaScript programs. We ran these programs in the Node.js environment. For instance, the following program prints &quot;Hello World&quot; to the console:</p>
+<pre><code class="language-javascript">console.log(&quot;Hello World&quot;);
+</code></pre>
+<p><em> example of a simple program called <code>hello_world.js</code> </em></p>
+<p>We can run this program by typing <code>node hello_world.js</code> in the terminal.</p>
+<h2>0.0 Upping our Node.js Development Game</h2>
+<p><strong>Before you start this week&#39;s lab, ensure you have NodeJS configured on your computer. <a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/267643/topics/3179365" target="_blank">If you have not done this, follow my guide here</a></strong></p>
+<h3>Package Management and the Package.json file</h3>
+<p><img src="assets/npm.png" alt=""></p>
+<p><em style="color:#A9A9A9"> The NPM package manager website (<a href="https://www.npmjs.com/" target="_blank">https://www.npmjs.com/</a>) </em></p>
+<p>Node.js has a package manager called <code>npm</code> which comes bundled with your node installation. It is similar to Pip in Python or Maven in Java.</p>
+<p>We can use <code>npm</code> to install packages that we can use in our programs.</p>
+<p>One of the reasons I love JavaScript is it has a rich package ecosystem.</p>
+<p>Think of packages as open-source, free bolt-ons to our programs.</p>
+<p>At the time of writing, there are over 1.3 million packages. <a href="https://www.npmjs.com/package" target="_blank">You can explore packages by visiting the NPM repository</a>.</p>
+<p>This week, we are going to use the packages (<code>express</code>, <code>ejs</code>, <code>chalkjs</code> and <code>nodemon</code>) to build a simple web application. We&#39;ll learn more about these packages, and how to include them in our projects, as we go along.</p>
+<h3>Exercise 0.1 : Getting Started</h3>
+<ol>
+<li>Create a folder called <code>lab_9</code>, this is where you will store all of the files for this lab.</li>
+<li>Open VS Code and open the <code>lab_9</code> folder.</li>
+</ol>
+<h3>Exercise 0.2 : Creating a Package.json file</h3>
+<p>It all starts with a <code>package.json</code> file. This file contains information about your project and the packages that it depends on. It also contains a list of scripts that you can run. In this part of the lab, we are going to create a <code>package.json</code> file and install a package called <code>chalk</code>. <code>chalk</code> is a package that we can use to add colour to the text that we print to the console. We&#39;ll use it to make our terminal outputs a little more interesting.</p>
+<p><img src="./hello_world.png" alt=""></p>
+<p><em style="color:#A9A9A9">The hello world program running in the VS Code terminal. Notice how it&#39;s green because we are using the <code>chalk</code> package. </em></p>
+<p>To create a <code>package.json</code> file:</p>
+<ol>
+<li>Open the terminal in VS Code. By default, your terminal will be pointing to the root of the <code>lab_9</code> folder. However, check this by typing <code>pwd</code> and pressing enter. If it is not pointing to the root of the <code>lab_9</code> folder, use the <code>cd</code> command to navigate to the root of the <code>lab_9</code> folder.</li>
+<li>Type <code>npm init</code> and press enter. You&#39;ll see some prompts keep pressing enter to use the defaults.</li>
+<li>You should now have a <code>package.json</code> file in your <code>lab_9</code> folder. This file contains information about your project and the packages that it depends on. It also contains a list of scripts that you can run. We&#39;ll look at this in more detail later.</li>
+</ol>
+<h3>Exercise 0.3 : Installing Packages</h3>
+<!-- insert image -->
+
+<p>We can now install the <code>chalk</code> package:</p>
+<ol>
+<li>In the terminal ensure it is pointing to the root of the <code>lab_9</code> folder, type <code>npm install chalk@4</code> and press enter. This command installs the <code>chalk</code> package and saves it as a dependency in the <code>package.json</code> file.</li>
+<li>If all has gone well, you should see that a <code>node_modules</code> folder has been created. This folder contains the <code>chalk</code> package and any other packages that it depends on. You should also see that the <code>package.json</code> file has been updated to include <code>chalk</code> in the list of dependencies. Finally, you should see a <code>package-lock.json</code> file has been created. <strong>Note,</strong> you never need to edit these files or directories. They are created and updated automatically by <code>npm</code>.<ol>
+<li>You should not edit the contents of the <code>node_modules</code> folders; you can, however, delete it and run <code>npm install</code> to reinstall all of the packages that your project depends on. As such, there is <strong>you should not commit this folder to your git repository or submit it as part of your assessment</strong>.</li>
+</ol>
+</li>
+<li>We will now use chalk. In the <code>lab_9</code> folder, create a file called <code>exercise_0_3.js</code>. Add the following code to the file:</li>
+</ol>
+<pre><code class="language-javascript">/**
+ * Import the chalk package from the node modules_folder, notice how we don&#39;t need to use an absolute path.
+ */
+const chalk = require(&quot;chalk&quot;);
+/**
+ * Use the chalk package to print a blue message to the console.
+ */
+console.log(chalk.blue(&quot;Hello world!&quot;));
+</code></pre>
+<ol>
+<li>In the terminal, type <code>node exercise_0_3.js</code> and press enter. You should see a blue message printed to the console. <strong>Try and change the message to green!</strong></li>
+</ol>
+<p><a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-9/solutions/exercise_0_3_and_0_4/exercise_0_3.js" target="_blank">If you got stuck: Click Here to See the Solution</a></p>
+<h3>Exercise 0.4: Installing Nodemon</h3>
+<!-- insert image -->
+
+<p>Nodemon is a package we can use to automatically restart our Node.js programs when we make changes to them. This is useful because it means we don&#39;t have to keep restarting manually.</p>
+<p>To understand why we need to install Nodemon, let&#39;s create a more sophisticated Node.js program.</p>
+<p>Up to this point, we&#39;ve not really created any Node.js programs. We&#39;ve just been running JavaScript files in the Node.js environment. The power of Node.js comes from the fact that we can use it to create web servers. This means we don&#39;t need to rely on a third-party web server such as Apache or Nginx.</p>
+<p>Let&#39;s create a Web Server and try and understand why we need to install Nodemon.</p>
+<ol>
+<li>Create a file called <code>exercise_0_4.js</code> in the <code>lab_9</code> folder. Add the following code to the file:</li>
+</ol>
+<pre><code class="language-javascript">/**
+ * Import the http package, this is a core Node.js package so it doesn&#39;t need to be installed.
+ */
+const http = require(&quot;http&quot;);
+const server = http.createServer(); // Create a server object.
+/**
+ * Import the chalk package from the node modules folder; we installed this in the previous exercise.
+ */
+const chalk = require(&quot;chalk&quot;);
+/**
+ * Listen for requests and respond with a message. Notice how we are using a trusty arrow function (req,res) =&gt; and passing it into sever.on and the second argument.
+ */
+server.on(&quot;request&quot;, (req, res) =&gt; {
+  res.end(&quot;hello world&quot;);
+});
+
+server.listen(8000, function () {
+  /*
+   * Print a message to the console when the server starts.
+   */
+  console.log(chalk.blue(&quot;Server is listening on port 8000&quot;));
+});
+</code></pre>
+<p>Do not worry if the code above seems somewhat alien to you; much of it may be new. In short, we are setting up web server listening on the localhost port 8000. When a client connects, we simply return hello world.</p>
+<ol>
+<li><p>In the terminal, type <code>node exercise_0_4.js</code> and press enter. You should see a message printed, saying that the server is listening on port 8000. This means that the server is running and waiting for requests. If you open a web browser and navigate to <code>http://localhost:8000</code> you should see a message saying &quot;hello world&quot;. Pat yourself on the back, you&#39;ve just created a web server using Node.js!</p>
+</li>
+<li><p>Notice how, in the terminal, your program is still running. Make a change to your code, for instance update &quot;hello world&quot; to &quot;Hello, World!&quot;. If you refresh or revisit <code>http://localhost:8000</code>, you will see that the change has not been applied. This is because the server is not restarting when we make changes to the code. We have to stop the server and restart it manually (press <code>ctrl + c</code> in the terminal and then type <code>node exercise_0_4.js</code> and press enter). This is a pain! We want the server to restart automatically when we make changes to the code.</p>
+</li>
+</ol>
+<p>This is where Nodemon comes in. Nodemon is a package that we can use to automatically restart our Node.js programs when we make changes to them.</p>
+<ol>
+<li><p>To install Nodemon, stop the existing program from running: press <code>ctrl + c</code> in the terminal. Then type <code>npm install -D nodemon</code> and press enter. The <code>-D</code> flag tells <code>npm</code> to install the package as a development dependency. If you check the <code>package.json</code> file you should see that Nodemon has been added to the list of development dependencies. These types of dependencies are only required during development and are not required when the application is deployed to a production environment.</p>
+</li>
+<li><p>Next, we need to update the <code>package.json</code> file to tell it to use Nodemon to run our program. Open the <code>package.json</code> file and add the following line to the <code>scripts</code> section (there is already a <code>test</code> script in there; you only need to add the <code>start</code> script), make sure you add a comma after the <code>test</code> script, before you add the <code>start</code> script:</p>
+</li>
+</ol>
+<pre><code class="language-json"> &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;start&quot;: &quot;nodemon exercise_0_4.js&quot;
+  },
+</code></pre>
+<p><em style="color:#A9A9A9">The scripts section of the package.json file. Nodemon is installed in the <code>node_modules</code> directory. However, notice how we don&#39;t need to use an absolute path to reference it. </em></p>
+<ol>
+<li>In the terminal make sure your application is not currently running, type <code>npm run start</code> and press enter. You should see a message printed to the console saying that the server is listening on port 8000. Now, if you make a change to the code and refresh the page, you should see that the change has been applied. This is because Nodemon is automatically restarting the server when we make changes to the code.</li>
+</ol>
+<p><strong>tip</strong></p>
+<p>Did you get a <code>Error: listen EADDRINUSE: address already in use :::8000</code> error. This means your application is still running from the previous step. Press <code>ctrl + c</code> in the terminal to stop it. Or, if all fails, use a different port number (e.g., 8001).</p>
+<p><a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/blob/master/week-9/solutions/exercise_0_3_and_0_4/exercise_0_4.js" target="_blank">If you got stuck: Click Here to See the Solution</a></p>
+<h2>1.0 Introduction to Express</h2>
+<p><img src="assets/express.png" alt=""></p>
+<p><em style="color:#A9A9A9"> The Express website (<a href="https://expressjs.com/" target="_blank">https://expressjs.com/</a>) </em></p>
+<p>Above, we created a simple web server using Node.js. To expand on this and create a more sophisticated web application we need to use a framework. A framework is a set of tools that we can use to build applications. We will use a framework called Express.</p>
+<p>Express is a Node.js package that we can use to build web applications. It provides a set of tools that make it easier to handle requests and responses. Further, it handles concerns such as routing and middleware.</p>
+<p>According to the the express documentation, &quot;express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications&quot;. In other words, it provides a lightweight framework to assist in the development of web applications.</p>
+<h3>Exercise 1.0 : Installing Express</h3>
+<p>From this point on, we are going to be building a simple web application. The entry point for this web application will be <code>index.js</code>. We will incrementally build up this application over the next few exercises.</p>
+<ol>
+<li>In the VS Code terminal window, type <code>npm install express</code> and press enter.</li>
+<li>Next, create the file <code>index.js</code>, this will be the entry point to our application.</li>
+<li>Add the following code:</li>
+</ol>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+const app = express();
+const port = 8000;
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  res.send(&quot;Hello, World!&quot;);
+});
+
+app.listen(port, () =&gt; {
+  /* 
+    Print a message to the console when the server starts. Notice how we are using a template literal to insert the port number into the string. This is a new feature of JavaScript that allows us to insert variables into strings. We use the backtick character to denote a template literal. We then use the ${} syntax to insert the variable. 
+  */
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+</code></pre>
+<p>The above example uses the express package to create a new web-server that listens on port 8000 (l.9). We can then set up listeners to respond to any given HTTP request. Above, we listen for a get request to the base URL of our server (l.5).</p>
+<ol>
+<li>Before we can run the application, we need to update the script tag in the package.json, so that it runs the index.js file. Open the <code>package.json</code> file and update the <code>scripts</code> section so that it looks like this:</li>
+</ol>
+<pre><code class="language-json"> &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;start&quot;: &quot;nodemon index.js&quot;
+  },
+</code></pre>
+<ol start="5">
+<li><p>In the VS code terminal, type <code>npm run start</code> and press enter. You should see a message printed to the console saying that the server is listening on port 8000. If you open a web browser and navigate to <code>http://localhost:8000</code> you should see a message saying &quot;Hello, World!&quot;. So far, we are not doing anything too exciting. However, we have created a web server using Node.js and Express.</p>
+<ol>
+<li>If your program is still running from the previous exercise, you will need to stop it by pressing <code>ctrl + c</code> in the terminal.</li>
+</ol>
+</li>
+<li><p>Add a new route to the application. For example, you could add the following code to the below the your existing route in <code>index.js</code>:</p>
+</li>
+</ol>
+<pre><code class="language-javascript">app.get(&quot;/about&quot;, (req, res) =&gt; {
+  res.send(&quot;This is the about page&quot;);
+});
+</code></pre>
+<ol>
+<li>To finish the exercise, create some further routes (e.g., <code>/contact</code>, <code>/about</code>).</li>
+</ol>
+<p><a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-9/solutions/exercise_1_0" target="_blank">If you got stuck: Click here to see the solution</a></p>
+<h3>Exercise 1.1 : Serving HTML files</h3>
+<p>Let&#39;s update the application so that it returns a HTML page instead of a plain text message. We are, after all, making web application.</p>
+<p>Express makes serving static files easy. For instance, let&#39;s assume that we are making simple website. When we receive an HTTP get request to the root path <code>(&quot;/&quot;)</code> of our application we can return an index.html file (see the sample below):</p>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+/**
+ * Import the path module, this is a core Node.js package so it doesn&#39;t need to be installed.
+ */
+const path = require(&quot;path&quot;);
+
+const app = express();
+const port = 8000;
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  /**
+   * serve the index.html file from the root of the project. Notice how we use the path module to resolve the path to the * file - this is imported at the top of the file. Using the path module is a good practice as it ensures that the path * is correct across different operating systems.
+   */
+  res.sendFile(path.resolve(__dirname, &quot;index.html&quot;));
+});
+
+app.listen(port, () =&gt; {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+</code></pre>
+<p><em> example of a simple express application that serves a HTML file. Make sure you have an index.html file in the root of your project. Further, make sure you have imported the path module at the top of your file! </em></p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My First Web Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;home page&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><em style="color:#A9A9A9"> a simple html page called index.html. This needs to be in the root of your project. In this case, the <code>lab_9</code> folder. </em></p>
+<ol>
+<li>Using the above example as a guide, within your <code>lab_9</code> folder set up and serve an html page, for each of the routes you created earlier (e.g., <code>/about</code> and <code>/contact</code>). For instance, when we visit <code>http://locahost:8000/about</code>; about.html should be served. You will need to create a HTML file for each route you created earlier (about, contact, and index). Place these files in the root of your project.</li>
+</ol>
+<p>Currently, we cannot serve static assets such as CSS and images in our HTML pages. In order to configure this functionality we need to use some middleware.</p>
+<p>Middleware can be considered functionality that runs between an HTTP request being received and a response being sent.</p>
+<p>Express has a number of built-in middleware functions, and we can use them by calling <code>app.use()</code> and passing the middleware function as an argument.</p>
+<p>Below is an example of how to use the <code>express.static()</code> middleware function, allowing us to serve static assets:</p>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+const app = express();
+const port = 8000;
+
+/**
+ *  Serve static files from the public folder
+ */
+app.use(express.static(&quot;public&quot;));.
+
+.... // the rest of your code
+</code></pre>
+<p><em style="color:#A9A9A9"> Above, express looks up the files relative to the static directory, so the name of the static directory is not part of the URL. For instance, if we place the image foo.jpeg in the public folder we would reference it in index.html like this, <code>&lt;img src=&quot;foo.jpeg&quot; &gt;</code>. </em></p>
+<p>So, if we had the following:</p>
+<pre><code class="language-bash">|- lab_9
+  |- index.js
+  |- index.html
+  |- public
+    |- foo.jpeg
+</code></pre>
+<p>We could reference foo in our index.html page like this:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My First Web Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;img src=&quot;foo.jpeg&quot; /&gt;
+    &lt;h1&gt;home page&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<ol start="2">
+<li>Can you find and insert a picture of <a href="https://www.peakpx.com/en/hd-wallpaper-desktop-katjp/download" target="_blank">Rick Astley</a> or a cute cat into one of your HTML pages. Follow the above example to serve the image. You will need to create a public folder in the root of your project, and set up the static middleware.</li>
+</ol>
+<p>Remember to place the image in the public folder, and you should be able to reference it in your HTML page using the <code>&lt;img src=&quot;filename.extension&quot;&gt;</code> tag. Remember to use the correct file extension (e.g., .jpeg, .png, .gif).</p>
+<p><a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-9/solutions/exercise_1_1" target="_blank">Did you get stuck: Click here for the solution</a></p>
+<h2>2.0 EJS Templates</h2>
+<p><img src="./ejs.png" alt=""></p>
+<blockquote>
+<blockquote>
+<p>The EJS website (<a href="https://ejs.co/" target="_blank">https://ejs.co/</a>)</p>
+</blockquote>
+</blockquote>
+<p>While serving plain HTML files provides us with a means to present a website, we do not have much flexibility and sophistication. For instance, how do we inject data into our html pages? Furthermore, how can we reuse sections of our HTML pages (e.g., the header and the footer)? Templating languages to the rescue!</p>
+<p>In this module, we will explore one such language, Embedded JavaScript templating; otherwise know as EJS.</p>
+<h3>Exercise 2.0 : Installing EJS</h3>
+<ol>
+<li>In the VS Code terminal window, type <code>npm install ejs</code> and press enter. You should be used to this by now!</li>
+</ol>
+<p>Now you&#39;ve installed EJS, yo can now tell express to render html pages using ejs. Below is a full example:</p>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+const path = require(&quot;path&quot;);
+const app = express();
+const port = 8000;
+const ejs = require(&quot;ejs&quot;);
+
+/**
+ * we are telling express to use ejs as our view engine. This means that express will look for ejs files in the views folder.
+ */
+app.set(&quot;view engine&quot;, &quot;ejs&quot;);
+
+/**
+ *  we are telling express to use the public folder to serve static files. This means that express will look for static files in the public folder.
+ */
+app.use(express.static(&quot;public&quot;));
+
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  res.render(&quot;index&quot;);
+});
+
+app.listen(port, () =&gt; {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+</code></pre>
+<p>In the above example, express will assume that we have an <code>index.ejs</code> file in a views folder, which lives in the root directory of your project.</p>
+<p>EJS, is a superset of HTML. This means, to get the above example to work, we can simply rename our index.html file to <code>index.ejs</code> and move it to our views folder.</p>
+<p>Using EJS, we now have some dynamic capabilities within our HTML views. The first thing you might want to do is extract a header into a shared folder such as <code>views/common/header.ejs</code> we could then share it amongst our pages as follows:</p>
+<pre><code class="language-html">&lt;!-- views/index.ejs --&gt;
+...
+&lt;body&gt;
+  &lt;%- include(&#39;common/header&#39;); %&gt;
+  &lt;!-- notice how we emit the .ejs extension this will assume we have a file called header.ejs in the views/common --&gt;
+  &lt;h1&gt;Home Page&lt;/h1&gt;
+  &lt;img src=&quot;images/test.jpeg&quot; alt=&quot;wtf&quot; /&gt;
+&lt;/body&gt;
+...
+</code></pre>
+<pre><code class="language-html">&lt;!-- views/common/header.ejs --&gt;
+
+&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;about&quot;&gt;&lt;/a&gt;About&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+<p>The project structure of the above example would look like this:</p>
+<pre><code class="language-bash">
+|- lab_9
+  |- index.js
+  |- public
+    |- images
+      |- test.jpeg
+  |- views
+    |- common
+      |- header.ejs
+    |- index.ejs
+</code></pre>
+<ol start="2">
+<li>Using the above example as guidance, can you update your application to use EJS templates.<ol>
+<li>You will need to create a views folder and move your HTML files into it, and change the extensions of the files to <code>.ejs</code>.</li>
+<li>Next, you will need to update your routes to render the correct EJS template. For instance, when we visit <code>http://locahost:8000/contact</code>, contact.ejs should be rendered.</li>
+<li>Finally, create a shared header and footer and include them in each of your pages. You will need to create a <code>views/common</code> folder and place your header and footer in it.</li>
+</ol>
+</li>
+</ol>
+<p><a href="https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-9/solutions/exercise_2_0" target="_blank">If you got stuck: Click here for the solution</a></p>
+<h2>Stretch Goal</h2>
+<p>Can you add some CSS and create some basic styles for your application (e.g., a background colour, a font, and some padding, make the links vertical). You will need to place your css file in the public folder you created. You will also need to update your HTML files to reference the CSS file. For instance, you could add the following line to the head of your HTML files:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+</code></pre>
+<p>If you are still a little unsure about css and html, then you should go over my pre-learning video and resources I&#39;ve created: <a href="https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2881545" target="_blank">https://surreylearn.surrey.ac.uk/d2l/le/lessons/252843/topics/2881545</a></p>
+</div>
+  </body>
+</html>

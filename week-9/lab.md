@@ -1,35 +1,10 @@
----
-title: "Node.js and Express: Lab"
-author: [Joe Appleton]
-date: "25-10-2023"
-subject: "Lab"
-keywords: [Lab]
-lang: "en"
-toc: true
-toc-own-page: false
-colorlinks: true
-listings-disable-line-numbers: true
-header-includes:
-  - |
-    ```{=latex}
-    \usepackage{awesomebox}
-    ```
-pandoc-latex-environment:
-  noteblock: [note]
-  tipblock: [tip]
-  warningblock: [warning]
-  cautionblock: [caution]
-  importantblock: [important]
-...
-
 # Lab 9: Node.js and Express
 
-![](./assets/outcome.png)
+![](./outcome.png)
 
-> > This is what we'll be building.
+<em style="color:#A9A9A9"> This is what we'll be building. </em>
 
 In this lab, you'll construct a simple web application. You'll use the Express framework to create a web server, and you'll use `ejs` templates to create templated web pages.
-
 
 ## A Quick Recap
 
@@ -39,19 +14,19 @@ Last week, we created some simple JavaScript programs. We ran these programs in 
 console.log("Hello World");
 ```
 
-> > example of a simple program called `hello_world.js`
+<em> example of a simple program called `hello_world.js` </em>
 
 We can run this program by typing `node hello_world.js` in the terminal.
 
 ## 0.0 Upping our Node.js Development Game
 
-**Before you start this week's lab, ensure you have completed the week 8 task "Exercise 0.1 : Leveling up our Development Environment". This task will ensure that you have the correct software installed and configured on your virtual machine.**
+**Before you start this week's lab, ensure you have NodeJS configured on your computer. [If you have not done this, follow my guide here](https://surreylearn.surrey.ac.uk/d2l/le/lessons/267643/topics/3179365)**
 
 ### Package Management and the Package.json file
 
 ![](assets/npm.png)
 
-> > The NPM package manager website (https://www.npmjs.com/)
+<em style="color:#A9A9A9"> The NPM package manager website (https://www.npmjs.com/) </em>
 
 Node.js has a package manager called `npm` which comes bundled with your node installation. It is similar to Pip in Python or Maven in Java.
 
@@ -65,32 +40,18 @@ At the time of writing, there are over 1.3 million packages. [You can explore pa
 
 This week, we are going to use the packages (`express`, `ejs`, `chalkjs` and `nodemon`) to build a simple web application. We'll learn more about these packages, and how to include them in our projects, as we go along.
 
-The above packages are simple to use; however, they are powerful. By the end of this session you will be able to complete the following assessment tasks:
-
-- [ ] 8. Application Structure [3 Marks]
-- [ ] 10. A Minimum of 4 User-facing Routes Served [4 marks]
-- [ ] 11. Construct EJS Views for the 4 Routes [3 marks]
-
-I don't teach maths; however, I think that's 10 marks. Or, nearly 30% of the marks for the web section of the assessment - not bad, hey?
-
 ### Exercise 0.1 : Getting Started
 
-1. As always, start and connect to your Azure Labs' virtual machine (VM) by visiting this link: [https://labs.azure.com/virtualmachines](https://labs.azure.com/virtualmachines).
-1. Connect to the VM:
-   1. Toggle the button to start – it might take a while.
-   2. Once it changes to Running, click on the monitor icon.
-   3. A file will be downloaded – click on it to run it, and you will be prompted to enter the password you created last time. IMPORTANT: the username must be `labuser` (remove the ~/).
-   4. Remember to click on the following icon to make the window resize appropriately <img  src="../assets/resize_icon.png"/>
-1. Within your VM, create a folder in your `C:\code` directory called `lab_9`.
-1. Open VS Code and open the `lab_9` folder.
+1.  Create a folder called `lab_9`, this is where you will store all of the files for this lab.
+2.  Open VS Code and open the `lab_9` folder.
 
 ### Exercise 0.2 : Creating a Package.json file
 
 It all starts with a `package.json` file. This file contains information about your project and the packages that it depends on. It also contains a list of scripts that you can run. In this part of the lab, we are going to create a `package.json` file and install a package called `chalk`. `chalk` is a package that we can use to add colour to the text that we print to the console. We'll use it to make our terminal outputs a little more interesting.
 
-![](assets/hello_world.png)
+![](./hello_world.png)
 
-> > The hello world program running in the VS Code terminal. Notice how it's green because we are using the `chalk` package.
+<em style="color:#A9A9A9">The hello world program running in the VS Code terminal. Notice how it's green because we are using the `chalk` package. </em>
 
 To create a `package.json` file:
 
@@ -108,8 +69,6 @@ We can now install the `chalk` package:
 2. If all has gone well, you should see that a `node_modules` folder has been created. This folder contains the `chalk` package and any other packages that it depends on. You should also see that the `package.json` file has been updated to include `chalk` in the list of dependencies. Finally, you should see a `package-lock.json` file has been created. **Note,** you never need to edit these files or directories. They are created and updated automatically by `npm`.
    1. You should not edit the contents of the `node_modules` folders; you can, however, delete it and run `npm install` to reinstall all of the packages that your project depends on. As such, there is **you should not commit this folder to your git repository or submit it as part of your assessment**.
 3. We will now use chalk. In the `lab_9` folder, create a file called `exercise_0_3.js`. Add the following code to the file:
-
-\break
 
 ```javascript
 /**
@@ -139,8 +98,6 @@ Up to this point, we've not really created any Node.js programs. We've just been
 Let's create a Web Server and try and understand why we need to install Nodemon.
 
 1. Create a file called `exercise_0_4.js` in the `lab_9` folder. Add the following code to the file:
-
-\break
 
 ```javascript
 /**
@@ -187,7 +144,7 @@ This is where Nodemon comes in. Nodemon is a package that we can use to automati
 
 ```
 
-> > The scripts section of the package.json file. Nodemon is installed in the `node_modules` directory. However, notice how we don't need to use an absolute path to reference it.
+<em style="color:#A9A9A9">The scripts section of the package.json file. Nodemon is installed in the `node_modules` directory. However, notice how we don't need to use an absolute path to reference it. </em>
 
 1. In the terminal make sure your application is not currently running, type `npm run start` and press enter. You should see a message printed to the console saying that the server is listening on port 8000. Now, if you make a change to the code and refresh the page, you should see that the change has been applied. This is because Nodemon is automatically restarting the server when we make changes to the code.
 
@@ -201,7 +158,7 @@ Did you get a `Error: listen EADDRINUSE: address already in use :::8000` error. 
 
 ![](assets/express.png)
 
-> > The Express website (https://expressjs.com/)
+<em style="color:#A9A9A9"> The Express website (https://expressjs.com/) </em>
 
 Above, we created a simple web server using Node.js. To expand on this and create a more sophisticated web application we need to use a framework. A framework is a set of tools that we can use to build applications. We will use a framework called Express.
 
@@ -216,8 +173,6 @@ From this point on, we are going to be building a simple web application. The en
 1. In the VS Code terminal window, type `npm install express` and press enter.
 2. Next, create the file `index.js`, this will be the entry point to our application.
 3. Add the following code:
-
-\break
 
 ```javascript
 const express = require("express");
@@ -253,8 +208,6 @@ The above example uses the express package to create a new web-server that liste
 
 6. Add a new route to the application. For example, you could add the following code to the below the your existing route in `index.js`:
 
-\break
-
 ```javascript
 app.get("/about", (req, res) => {
   res.send("This is the about page");
@@ -270,8 +223,6 @@ app.get("/about", (req, res) => {
 Let's update the application so that it returns a HTML page instead of a plain text message. We are, after all, making web application.
 
 Express makes serving static files easy. For instance, let's assume that we are making simple website. When we receive an HTTP get request to the root path `("/")` of our application we can return an index.html file (see the sample below):
-
-\break
 
 ```javascript
 const express = require("express");
@@ -295,7 +246,7 @@ app.listen(port, () => {
 });
 ```
 
-> > example of a simple express application that serves a HTML file. Make sure you have an index.html file in the root of your project. Further, make sure you have imported the path module at the top of your file!
+<em> example of a simple express application that serves a HTML file. Make sure you have an index.html file in the root of your project. Further, make sure you have imported the path module at the top of your file! </em>
 
 ```html
 <!DOCTYPE html>
@@ -309,7 +260,7 @@ app.listen(port, () => {
 </html>
 ```
 
-> > a simple html page called index.html. This needs to be in the root of your project. In this case, the `lab_9` folder.
+<em style="color:#A9A9A9"> a simple html page called index.html. This needs to be in the root of your project. In this case, the `lab_9` folder. </em>
 
 1. Using the above example as a guide, within your `lab_9` folder set up and serve an html page, for each of the routes you created earlier (e.g., `/about` and `/contact`). For instance, when we visit `http://locahost:8000/about`; about.html should be served. You will need to create a HTML file for each route you created earlier (about, contact, and index). Place these files in the root of your project.
 
@@ -335,7 +286,7 @@ app.use(express.static("public"));.
 
 ```
 
-> > Above, express looks up the files relative to the static directory, so the name of the static directory is not part of the URL. For instance, if we place the image foo.jpeg in the public folder we would reference it in index.html like this, `<img src="foo.jpeg" >`.
+<em style="color:#A9A9A9"> Above, express looks up the files relative to the static directory, so the name of the static directory is not part of the URL. For instance, if we place the image foo.jpeg in the public folder we would reference it in index.html like this, `<img src="foo.jpeg" >`. </em>
 
 So, if we had the following:
 
@@ -348,8 +299,6 @@ So, if we had the following:
 ```
 
 We could reference foo in our index.html page like this:
-
-\break
 
 ```html
 <!DOCTYPE html>
@@ -372,7 +321,7 @@ Remember to place the image in the public folder, and you should be able to refe
 
 ## 2.0 EJS Templates
 
-![](assets/ejs.png)
+![](./ejs.png)
 
 > > The EJS website (https://ejs.co/)
 
@@ -385,8 +334,6 @@ In this module, we will explore one such language, Embedded JavaScript templatin
 1. In the VS Code terminal window, type `npm install ejs` and press enter. You should be used to this by now!
 
 Now you've installed EJS, yo can now tell express to render html pages using ejs. Below is a full example:
-
-\break
 
 ```javascript
 const express = require("express");
@@ -419,8 +366,6 @@ In the above example, express will assume that we have an `index.ejs` file in a 
 EJS, is a superset of HTML. This means, to get the above example to work, we can simply rename our index.html file to `index.ejs` and move it to our views folder.
 
 Using EJS, we now have some dynamic capabilities within our HTML views. The first thing you might want to do is extract a header into a shared folder such as `views/common/header.ejs` we could then share it amongst our pages as follows:
-
-\break
 
 ```html
 <!-- views/index.ejs -->
