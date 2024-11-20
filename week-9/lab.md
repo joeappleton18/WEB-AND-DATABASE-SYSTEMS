@@ -24,7 +24,7 @@ We can run this program by typing `node hello_world.js` in the terminal.
 
 ### Package Management and the Package.json file
 
-![](assets/npm.png)
+![](./npm.png)
 
 <em style="color:#A9A9A9"> The NPM package manager website (https://www.npmjs.com/) </em>
 
@@ -156,7 +156,7 @@ Did you get a `Error: listen EADDRINUSE: address already in use :::8000` error. 
 
 ## 1.0 Introduction to Express
 
-![](assets/express.png)
+![](./express.png)
 
 <em style="color:#A9A9A9"> The Express website (https://expressjs.com/) </em>
 
