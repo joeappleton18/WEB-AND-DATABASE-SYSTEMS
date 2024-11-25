@@ -1,23 +1,6 @@
----
-title: "Creating a Full Stack Application: Lab"
-author: [Joe Appleton]
-date: "22-11-2023"
-subject: "Lab"
-keywords: [Lab]
-lang: "en"
-toc: true
-colorlinks: true
-toc-own-page: false
-listings-disable-line-numbers: true
-...
-
-<!--
- TODO: add an edit task.
--->
-
 # Lab 10: Creating a Full Stack Application
 
-![](./assets/header.png)
+![](header.png)
 
 > > This is what we are making in this lab!
 
@@ -29,15 +12,13 @@ In doing so, you are going to make a full-stack web application. By the end of t
 
 You should note, most of you won't finish this lab in the session. That's ok. You'll have plenty of time to finish the application in your own time.
 
-**Following this lab, I'll release a video that will walk you through the solution.**
+**I have created a full video solution that recaps not only this lab but also the last two**
 
 If you get stuck, don't forget to ask for help.
 
 ## Dependencies
 
-**Ensure the Node Environment path is set on your VM, and you have installed VS code (see, the week 8 lab, "exercise 0.1 : Leveling up our Development Environment".**
-
-If you are working along from home, you won't need to set the path; however, you will need to install VSCode (see, https://code.visualstudio.com/download) and NodeJS (see, https://nodejs.org/en ). Further, you will need to install mysql (see, https://dev.mysql.com/downloads/installer/). Finally, ensure you have git installed (see, https://git-scm.com/downloads).
+Ensure you have Node.js installed on your computer or the lab machines. If you don't, you can download it [here](https://surreylearn.surrey.ac.uk/d2l/le/lessons/267643/topics/3179365).
 
 ## 0.0 Getting Started
 
@@ -45,25 +26,25 @@ In this part of the lab, we'll get set up and get the starter code.
 
 <div class="alert alert-warning">
 
-Ensure you have NodeJS set up on the computer you are using. We did this last week, check here if you have not done it. 
+Ensure you have NodeJS set up on the computer you are using. We did this last week, check here if you have not done it.
+
 ### Exercise 0.2: Getting the starter code
 
 This week, I've provided you with some starter code. We'll use git to get this code.
 
-![](./assets/11.open_terminal.png)
-
-1. Within your VM, open the a terminal window.
-2. Navigate to the `lab_10` folder you created earlier: `cd C:\code\lab_10`, and run the following command (**don't forget the `.` at the end, this tells git to clone the code into the current directory**):
+1. Create a folder called `lab_10`
+2. Open a terminal on your computer. If you are using VS Code, you can open a terminal by clicking `Terminal` > `New Terminal`. Or, you can use power shell, or a terminal of your choice.
+3. Within the terminal, navigate to the `lab_10` folder you created earlier, and run the following command (**don't forget the `.` at the end, this tells git to clone the code into the current directory**):
 
    `git clone https://github.com/joeappleton18/w-d-l-10.git .`
 
 > > This will clone the starter code into your lab_10 folder.
 
-![](./assets/vscode_open_folder.png)
+![](vscode_open_folder.png)
 
 3. Open the `lab_10` folder in VS Code.
 
-![](./assets/new_terminal.png)
+![](new_terminal.png)
 
 4. We are now ready to install our dependencies. Remember, we are using the package manager npm to install manage dependencies listed in `package.json` file (you can find this file in the root of your `lab_10` folder), take a look in this folder. We'll use the VS Code terminal to do this. Open the VS Code terminal and run the following command:
 
@@ -71,7 +52,9 @@ This week, I've provided you with some starter code. We'll use git to get this c
 npm install
 ```
 
-> > ensure you are in the `lab_10` folder when you run this command. Some of you may be in the parent folder; if you did not correctly clone the git repository, you may have a folder called `w-d-l-10` in your `lab_10` folder. If this is the case, you'll need to run the following command: `cd w-d-l-10` and then run `npm install`.
+<div class="alert alert-info">
+ensure you are in the `lab_10` folder when you run this command. Some of you may be in the parent folder; if you did not correctly clone the git repository, you may have a folder called `w-d-l-10` in your `lab_10` folder. If this is the case, you'll need to run the following command: `cd w-d-l-10` and then run `npm install`.
+</div>
 
 The above command installs the dependencies listed in the `package.json` file, and places them in the `node_modules` folder (it may take a little bit of time). For now, we have pulled in just three dependencies:
 
@@ -85,7 +68,7 @@ The above command installs the dependencies listed in the `package.json` file, a
    Example app listening at http://localhost:8000
 ```
 
-![](./assets/header.png)
+![](header.png)
 
 6. Open a browser in your VM and navigate to `http://localhost:8000`.
 
@@ -93,25 +76,17 @@ You should see our University of Discord web application. Currently, all of the 
 
 ## 0.3 Setting up the database
 
-![terminal](assets/11.open_terminal.png)
+1. If you are using the lab computers, ensure you have started the MySQL server. If you have not done this, you can follow the instructions [here](https://surreylearn.surrey.ac.uk/d2l/le/lessons/267643/topics/3154842).
 
-Let's set up the database we'll use for this lab.
+2. Open DBeaver, and connect to your MySQL server.
 
-1. Open the Laragon terminal. While you are there, ensure all services are running!
+3. In the DBeaver task bar click File > OpenFile and navigate to the `lab_10` folder, then open the `seeds` folder. In this folder, you'll find a file called `university.sql` - open this file.
 
-1. In the Laragon terminal load the database by running the following commands (ensure, if you copy and past the commands, there are no spaces - it's a good idea to type them out):
+![](open_sql_editor.png)
 
-   1. Navigate the the MySQL bin folder:
-      - `cd C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin`
-   2. Run the command below to run the database script:
-      -  `mysql -u root -p < C:\code\lab_10\seeds\university.sql`
-   3. You'll be prompted for a password, just press enter.
-   4. To check the database has been created:
-      1. From the terminal run: `mysql -u root -p`
-      2. Again, you'll be prompted for a password, just press enter.
-      3. You should now be in the MySQL shell. Run the following command to see the databases: `show databases;`
-      4. You should see the `university_web` database listed. This is the database you created by running university.sql.
-   5. Take a look at some of the tables: `use university_web;` then `show tables;` then `select * from Student;`
+4. Ensure you've selected your localhost connection, and click the green play button to run the script. This will create the `university_web` database and populate it with some data.
+
+![](populating_the_databae.png)
 
 Phew! That was a lot of setup. But now we are ready to start adding some dynamic functionality.
 
@@ -123,19 +98,19 @@ We'll then use this connection to inject data into our, currently hard-coded, EJ
 
 ### Exercise 1.0: Adding a database connection
 
-1. First, we need to install the Node.js, `mysql` package. This will allow us to connect to our database, and run queries. To do this, we'll use the VS Code terminal.
+1. First, we need to install the Node.js, `mysql2` package. This will allow us to connect to our database, and run queries. To do this, we'll use the VS Code terminal.
 
-![](./assets/terminal-window.png)
+![](terminal-window.png)
 
 2. As your application is currently running in the terminal, create a new terminal tab in VS Code by clicking the `+` icon in the terminal pane.
 
 3. In the VS code terminal, run the following command:
 
 ```bash
-npm install mysql
+npm install mysql2
 ```
 
-If all has gone well, you should see mysql listed in the `package.json` file. This means we have successfully installed the package.
+If all has gone well, you should see mysql2 listed in the `package.json` file. This means we have successfully installed the package.
 
 4. Switch back to the terminal tab running your program. You'll need to check this regularly to see if you have any errors (hopefully you won't have any at the moment)
 
@@ -145,7 +120,7 @@ If all has gone well, you should see mysql listed in the `package.json` file. Th
 /**
  * Import the mysql package installed in the previous step.
  */
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 /**
  * Import the util package. We use this to use async await with mysql.
@@ -163,13 +138,11 @@ const PORT = 8000;
 const DB_HOST = "localhost";
 const DB_USER = "root";
 const DB_NAME = "university_web";
-const DB_PASSWORD = "";
+const DB_PASSWORD = ""; // add your unique password here
 const DB_PORT = 3306;
 ```
 
 The constants above are used to store database connection information. We can use these constants to create a connection to our database. Add the following code below the const declarations:
-
-\break
 
 ```javascript
 /**
@@ -186,6 +159,7 @@ var connection = mysql.createConnection({
 /*
  * we do this to use async await with mysql
  * don't worry about this for now, just understand that we need it; otherwise * we end up with a lot of callback functions.
+ * technically, we could import the mysql/promise package; however, this way allows for backwards compatibility.
  */
 connection.query = util.promisify(connection.query).bind(connection);
 
@@ -204,7 +178,7 @@ connection.connect(function (err) {
 
 > > Connecting to the database.
 
-![](./assets/boom.png)
+![](boom.png)
 
 If all has worked correctly, you should see the following message in the terminal: `Booom! You are connected`.
 
@@ -222,7 +196,7 @@ In this section, we'll learn how to inject data into our EJS views. We'll start 
 
 1. Navigate to `http://localhost:8000` in your browser. You should see the following page:
 
-![](./assets/homepage.png)
+![](homepage.png)
 
 If you recall from last week, we use express to create routes. These routes are responsible for handling requests from the browser. In the `index.js` file, you should see the following code:
 
@@ -259,8 +233,6 @@ Within EJS templates, we can access the values injected into our view by using t
 
 Now we know how to inject data into our views, we can start to make our application dynamic. Let's consider our university_web database. We have a number of tables:
 
-\break
-
 ```bash
 
 +--------------------------+
@@ -293,8 +265,6 @@ const studentCount = await connection.query(
 
 The above code runs the query `"SELECT COUNT(*) as count FROM Student"` and stores the result in a constant called `studentCount`. Notice how we use the `await` keyword. This is because the `connection.query` function is asynchronous. `studentCount` will be an array of objects. In this case, it will be an array with one object:
 
-\break
-
 ```javascript
 [
   {
@@ -322,11 +292,11 @@ app.get('/', async (req, res) => {
 
 > > index.js
 
-3. To finish this task, use the guidance above to replace hard coded values (`studentCount`, `academicCount`, `departmentCount`, and `courseCount`) with the output of SQL queries. You should store the output of the queries in constants. Then use the constants to inject the values into the view, like we did with `studentCount` above.
+1. To finish this task, use the guidance above to replace hard coded values (`studentCount`, `academicCount`, `departmentCount`, and `courseCount`) with the output of SQL queries. You should store the output of the queries in constants. Then use the constants to inject the values into the view, like we did with `studentCount` above.
 
 When done, your homepage should look like this:
 
-![](./assets/end_homepage.png)
+![](end_homepage.png)
 
 **[Click here to see the solutions](https://github.com/joeappleton18/WEB-AND-DATABASE-SYSTEMS/tree/master/week-10/solutions/exercise_2_0)**
 
@@ -336,7 +306,7 @@ So far, we have only injected simple, single object into our home view. However,
 
 Let's consider the `/students` route. You can fire this route by visiting `http://localhost:8000/students` in your VMs browser. You should see the following page:
 
-![](./assets/student.png)
+![](student.png)
 
 Currently, there is no dynamic data on these pages. Take a look at `views/students.ejs`. You should see a bog standard html table. Let's see if we can make this view dynamic.
 
@@ -426,7 +396,7 @@ There are a couple of things to note here:
 
 If you click on a view link in http://localhost:8000/students you'll see the following page:
 
-![](./assets/view.png)
+![](view.png)
 
 Let's consider how we can access the URN to get the student from the database and complete the view. In `index.js`, consider the route
 
@@ -468,7 +438,7 @@ Take a look at `views/student_view.ejs`. You should and see how we are using the
 
 So far, we have only displayed data. However, we can also update data. Let's consider the `/students/edit` route. You can fire this route by visiting `http://localhost:8000/students/edit/1` in your VM's web browser. You should see the following page:
 
-![](./assets/edit.png)
+![](edit.png)
 
 You've probably guessed, the values in this page are hard coded. Let's see if we can make this view dynamic. The first thing we need to consider is how we are going to get the data for the student we want to edit.
 
@@ -510,11 +480,11 @@ The most common way for users to send data is through HTML forms - you probably 
 
 Currently, the form has hard coded data! Let's consider how we can update this.
 
-2. In VS code, open `views/student_edit.ejs`.  Navigate to the `<form>` element there are two things we need to consider:
+2. In VS code, open `views/student_edit.ejs`. Navigate to the `<form>` element there are two things we need to consider:
 
    1. The first is the `method` attribute in the form tag: `<form method="post" class="edit_form">` in this instance it is post. This tells the browser that we want to send a POST request to the server. We could add an optional, `action` attribute to the form tag. This tells the browser where to send the request. If we don't specify an action, the browser will send the request to the current route. In this case, it will send the request to the current url (e.g., `/students/edit/612345`).
    2. The second is how we embed values into the form. Consider the following: `<input type="tel" value="19129129129" name="Stu_Phone" required>`. There are some important things to note here:
-      - The `value` attribute is used to set the value of the input. In this case, we are hard coding the value to "19129129129", we will need to update this later.  
+      - The `value` attribute is used to set the value of the input. In this case, we are hard coding the value to "19129129129", we will need to update this later.
       - The `name` attribute is used to give the input a name. The name should match the name of the field in the database. In this case, we are using the `Stu_Phone` field.
       - The `required` attribute is used to tell the browser that the input is required. If the user tries to submit the form without filling in the input, the browser will display an error message.
 
@@ -580,9 +550,7 @@ app.post("/students/edit/:id", async (req, res) => {
 
 > > `index.js`
 
-
 1. Submit the form (press the update button on the update page), and check the terminal. You'll see a long list of values; however, no `Stu_Phone` or `Stu_Course`! This is because we need to tell Express to parse our form values and attache them to the HTTP request. To do this we first need to install the `body-parser` middleware package.
-   
 2. In the terminal, run the following command:
 
 ```bash
@@ -597,7 +565,7 @@ const bodyParser = require('body-parser');
 
 ...  // this means there is code here, I've removed it for brevity
 
-// below the other use statement (e.g., app.use(express.static('public'));), towards the top of the file, 
+// below the other use statement (e.g., app.use(express.static('public'));), towards the top of the file,
 app.use(bodyParser.urlencoded({ extended: false }));
 
 ```
